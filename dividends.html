@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dividend Calendar — Rise With Stocks</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
+:root{--navy:#0B1120;--gold:#C8860A;--gold-bright:#F5A623;--gold-light:#FFD166;--gold-pale:#FFF8E8;--white:#FFFFFF;--off-white:#F8F7F4;--text:#1A1A2E;--text-mid:#444466;--text-light:#888899;--border:#E8E4DA;--green:#16A34A;--green-light:#DCFCE7;--purple:#7C3AED;--purple-light:#EDE9FE;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);}
+NAV_CSS_PLACEHOLDER
+.hero{background:var(--navy);padding:52px 24px 40px;text-align:center;}
+.eyebrow{display:inline-block;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:18px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,6vw,44px);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:12px;}
+.hero h1 em{color:var(--gold-light);font-style:normal;}
+.hero p{color:rgba(255,255,255,.6);font-size:15px;max-width:500px;margin:0 auto;line-height:1.7;}
+.main{max-width:900px;margin:32px auto 60px;padding:0 24px;}
+
+/* PORTFOLIO BUILDER */
+.builder-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.05);}
+.builder-header{background:var(--navy);padding:16px 20px;display:flex;align-items:center;gap:10px;}
+.builder-header h2{color:var(--white);font-size:15px;font-weight:700;}
+.builder-icon{font-size:20px;}
+.builder-body{padding:20px;}
+.stock-input-row{display:flex;gap:10px;margin-bottom:12px;align-items:flex-end;flex-wrap:wrap;}
+.stock-input-row select,.stock-input-row input{padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;color:var(--text);background:var(--off-white);outline:none;transition:border-color .2s;}
+.stock-input-row select:focus,.stock-input-row input:focus{border-color:var(--gold);background:var(--white);}
+.stock-input-row select{flex:2;min-width:160px;}
+.stock-input-row input{flex:1;min-width:100px;}
+.add-btn{background:var(--navy);color:var(--gold-light);border:none;border-radius:10px;padding:11px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;flex-shrink:0;}
+.add-btn:hover{background:var(--gold);color:var(--navy);}
+
+/* PORTFOLIO TABLE */
+.portfolio-table{width:100%;border-collapse:collapse;margin-bottom:16px;}
+.portfolio-table th{background:var(--off-white);font-size:11px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);}
+.portfolio-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:14px;vertical-align:middle;}
+.portfolio-table tr:last-child td{border-bottom:none;}
+.remove-btn{background:none;border:1px solid var(--border);color:var(--text-light);border-radius:6px;padding:3px 8px;font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;}
+.remove-btn:hover{border-color:#DC2626;color:#DC2626;}
+.empty-state{text-align:center;padding:32px;color:var(--text-light);font-size:14px;}
+
+/* SUMMARY CARDS */
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:28px;}
+.sum-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;}
+.sum-card.gold-card{border-color:var(--gold);background:var(--gold-pale);}
+.sum-label{font-size:10px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.sum-val{font-size:22px;font-weight:900;color:var(--navy);}
+.sum-val.gold{color:var(--gold);}
+.sum-val.green{color:var(--green);}
+
+/* CALENDAR */
+.cal-section{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:24px;}
+.cal-header{background:var(--navy);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;}
+.cal-header h3{color:var(--white);font-size:15px;font-weight:700;}
+.cal-filter{display:flex;gap:6px;}
+.cal-filter-btn{padding:5px 12px;border-radius:100px;border:1px solid rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.6);font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.cal-filter-btn.active{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+.dividend-row{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--border);transition:background .15s;}
+.dividend-row:last-child{border-bottom:none;}
+.dividend-row:hover{background:var(--off-white);}
+.div-date-box{width:52px;height:52px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:var(--off-white);border:1px solid var(--border);}
+.div-date-box.upcoming{background:var(--green-light);border-color:var(--green);}
+.div-date-box.past{opacity:.5;}
+.div-month{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-light);}
+.div-day{font-size:20px;font-weight:900;color:var(--navy);line-height:1;}
+.div-date-box.upcoming .div-month{color:var(--green);}
+.div-date-box.upcoming .div-day{color:var(--green);}
+.div-info{flex:1;}
+.div-stock{font-size:14px;font-weight:800;color:var(--navy);}
+.div-name{font-size:12px;color:var(--text-light);}
+.div-type{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;text-transform:uppercase;margin-top:3px;}
+.type-interim{background:rgba(124,58,237,.1);color:var(--purple);}
+.type-final{background:var(--green-light);color:var(--green);}
+.type-special{background:var(--gold-pale);color:var(--gold);}
+.div-amount-col{text-align:right;flex-shrink:0;}
+.div-amount{font-size:16px;font-weight:900;color:var(--green);}
+.div-yield{font-size:11px;color:var(--text-light);margin-top:2px;}
+.div-my-income{font-size:12px;font-weight:700;color:var(--gold);margin-top:3px;}
+.div-status{font-size:11px;color:var(--text-light);text-align:right;margin-top:3px;}
+.no-dividend{text-align:center;padding:40px;color:var(--text-light);}
+
+/* EXPLAINER */
+.explainer{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px;}
+.explainer h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:16px;}
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;}
+.exp-card{background:var(--off-white);border-radius:10px;padding:14px;}
+.exp-card h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.exp-card p{font-size:12px;color:var(--text-light);line-height:1.6;}
+.cta-box{background:var(--navy);border-radius:16px;padding:32px;text-align:center;margin-top:20px;}
+.cta-box h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--white);margin-bottom:8px;}
+.cta-box p{color:rgba(255,255,255,.6);font-size:14px;margin-bottom:20px;}
+.shine-btn{position:relative;background:linear-gradient(135deg,#F5A623,#C8860A,#F5A623);color:var(--navy);font-size:16px;font-weight:900;padding:16px 32px;border-radius:12px;border:none;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 16px rgba(200,134,10,.4);overflow:hidden;text-decoration:none;display:inline-block;}
+.shine-btn::before{content:'';position:absolute;top:-50%;left:-75%;width:50%;height:200%;background:linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,.45),rgba(255,255,255,0));transform:skewX(-20deg);animation:shimmer 2.5s infinite;}
+@keyframes shimmer{0%{left:-75%}100%{left:125%}}
+footer{background:var(--navy);padding:28px 24px;text-align:center;margin-top:48px;}
+footer p{font-size:11px;color:rgba(255,255,255,.35);line-height:1.8;}
+footer a{color:var(--gold-light);text-decoration:none;}
+.footer-logo{margin-bottom:12px;}
+@media(max-width:600px){.stock-input-row{flex-direction:column;}.div-amount-col{min-width:80px;}}
+</style>
+</head>
+<body>
+NAV_HTML_PLACEHOLDER
+<section class="hero">
+  <div class="eyebrow">Free Tool</div>
+  <h1>NGX <em>Dividend Calendar</em></h1>
+  <p>Enter your Nigerian stocks. See exactly when your dividend payments are coming and how much you will earn. Built for Nigerian investors.</p>
+</section>
+<div class="main">
+
+  <!-- PORTFOLIO BUILDER -->
+  <div class="builder-card">
+    <div class="builder-header">
+      <div class="builder-icon">📂</div>
+      <h2>My Portfolio — Add Your NGX Stocks</h2>
+    </div>
+    <div class="builder-body">
+      <div class="stock-input-row">
+        <select id="stock-select">
+          <option value="">Select a stock...</option>
+          <option value="DANGCEM">DANGCEM — Dangote Cement</option>
+          <option value="MTNN">MTNN — MTN Nigeria</option>
+          <option value="GTCO">GTCO — GTCO Plc</option>
+          <option value="ZENITHBANK">ZENITHBANK — Zenith Bank</option>
+          <option value="STANBIC">STANBIC — Stanbic IBTC Holdings</option>
+          <option value="WEMABANK">WEMABANK — Wema Bank</option>
+          <option value="ETI">ETI — Ecobank Transnational</option>
+          <option value="JAIZBANK">JAIZBANK — Jaiz Bank</option>
+          <option value="NPFMCRFBK">NPFMCRFBK — NPF Microfinance Bank</option>
+          <option value="BUAFOODS">BUAFOODS — BUA Foods</option>
+          <option value="BUACEMENT">BUACEMENT — BUA Cement</option>
+          <option value="NASCON">NASCON — NASCON Allied Industries</option>
+          <option value="UNILEVER">UNILEVER — Unilever Nigeria</option>
+          <option value="VITAFOAM">VITAFOAM — Vitafoam Nigeria</option>
+          <option value="UACN">UACN — UACN Plc</option>
+          <option value="TRANSCORPN">TRANSCORPN — Transcorp Nigeria</option>
+          <option value="GEREGU">GEREGU — Geregu Power</option>
+          <option value="TRANSCORP">TRANSCORP — Transcorp Power</option>
+          <option value="SEPLAT">SEPLAT — Seplat Energy (USD)</option>
+          <option value="ETERNA">ETERNA — Eterna Plc</option>
+          <option value="ARADEL">ARADEL — Aradel Holdings</option>
+          <option value="WAPCO">WAPCO — Lafarge Africa</option>
+          <option value="DANGREFINERY">DANGREFINERY — Dangote Refinery (IPO 2026)</option>
+          <option value="BETAGLAS">BETAGLAS — Beta Glass</option>
+          <option value="CAP">CAP — CAP Plc</option>
+          <option value="IMG">IMG — Industrial & Medical Gases</option>
+          <option value="OKOMUOIL">OKOMUOIL — Okomu Oil Palm</option>
+          <option value="PRESCO">PRESCO — Presco Plc</option>
+          <option value="CUSTODIAN">CUSTODIAN — Custodian Investment</option>
+          <option value="NEM">NEM — NEM Insurance</option>
+          <option value="AIICO">AIICO — AIICO Insurance</option>
+          <option value="MBENEFIT">MBENEFIT — Mutual Benefits Assurance</option>
+          <option value="FIDSON">FIDSON — Fidson Healthcare</option>
+          <option value="MAYBAKER">MAYBAKER — May & Baker Nigeria</option>
+          <option value="NGXGROUP">NGXGROUP — NGX Group</option>
+          <option value="UCAP">UCAP — United Capital</option>
+          <option value="AFRIPRUDE">AFRIPRUDE — Africa Prudential</option>
+          <option value="VFDGRP">VFDGRP — VFD Group</option>
+          <option value="NAHCO">NAHCO — NAHCO Plc</option>
+          <option value="SAHCO">SAHCO — SAHCO Plc</option>
+          <option value="JULBERGER">JULBERGER — Julius Berger</option>
+          <option value="TRANSCOHOT">TRANSCOHOT — Transcorp Hotels</option>
+          <option value="IKEJATL">IKEJATL — Ikeja Hotel</option>
+          <option value="CWG">CWG — CWG Plc</option>
+          <option value="ETRANZACT">ETRANZACT — E-Tranzact International</option>
+          <option value="CHAMS">CHAMS — CHAMS Holding</option>
+          <option value="ABCTRANS">ABCTRANS — ABC Transport</option>
+          <option value="NIDF">NIDF — NIDF REIT</option>
+          <option value="UPDC_REIT">UPDC_REIT — UPDC REIT</option>
+        </select>
+        <input type="number" id="shares-input" placeholder="Number of shares" min="1">
+        <button class="add-btn" onclick="addStock()">+ Add Stock</button>
+      </div>
+      <div id="portfolio-table-wrap">
+        <div class="empty-state">📊 Add your stocks above to see your dividend calendar</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-grid" id="summary-grid" style="display:none;">
+    <div class="sum-card"><div class="sum-label">Stocks in Portfolio</div><div class="sum-val" id="s-stocks">0</div></div>
+    <div class="sum-card gold-card"><div class="sum-label">Est. Annual Dividends</div><div class="sum-val gold" id="s-annual">₦0</div></div>
+    <div class="sum-card"><div class="sum-label">Next Dividend In</div><div class="sum-val green" id="s-next">—</div></div>
+    <div class="sum-card"><div class="sum-label">Est. Monthly Income</div><div class="sum-val" id="s-monthly">₦0</div></div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="cal-section">
+    <div class="cal-header">
+      <h3>📅 Dividend Calendar 2026</h3>
+      <div class="cal-filter">
+        <button class="cal-filter-btn active" onclick="filterCal('all',this)">All</button>
+        <button class="cal-filter-btn" onclick="filterCal('upcoming',this)">Upcoming</button>
+        <button class="cal-filter-btn" onclick="filterCal('my',this)">My Stocks</button>
+      </div>
+    </div>
+    <div id="cal-body"></div>
+  </div>
+
+  <div class="explainer">
+    <h3>Understanding Dividend Dates</h3>
+    <div class="exp-grid">
+      <div class="exp-card"><h4>📋 Declaration Date</h4><p>The board officially announces the dividend amount per share. Share price usually rises after this announcement.</p></div>
+      <div class="exp-card"><h4>🔴 Ex-Dividend Date</h4><p>You MUST own the shares BEFORE this date to qualify for the dividend. Buy on or after this date and you miss the payment.</p></div>
+      <div class="exp-card"><h4>📸 Record Date</h4><p>The company checks its shareholder register. If your name is there, you receive the dividend.</p></div>
+      <div class="exp-card"><h4>💰 Payment Date</h4><p>The actual date your dividend is credited to your brokerage account. Usually 2–4 weeks after the record date.</p></div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h3>Want to Learn How to Maximise Your Dividends?</h3>
+    <p>The Dangote Refinery IPO Playbook covers dollar dividends, dividend reinvestment, and post-listing strategy in detail.</p>
+    <a href="https://nestuge.com/uuowodqkx" class="shine-btn">Get the Playbook — ₦4,500 →</a>
+  </div>
+</div>
+<footer>
+  <div class="footer-logo">FOOTER_LOGO_PLACEHOLDER</div>
+  <p>© 2026 King Moses O.A. · Rise With Stocks · Learn. Invest. Grow.<br>
+  <a href="/">Home</a> · <a href="/calculator.html">IPO Calculator</a> · <a href="https://nestuge.com/uuowodqkx">Get the Playbook</a><br><br>
+  Dividend data sourced from NGX corporate action filings, NGX Pulse, and verified financial news (Nairametrics, Investors King). Last updated: August 2026. Always verify with your registrar. Always verify payment dates with your broker or company investor relations.</p>
+</footer>
+<script>
+
+const DIVDATA = [
+  // ── Q1 2026 ──
+  {ticker:"NIDF",name:"NIDF Q4 2025",sector:"REIT",divPS:4.68,type:"Distribution",qualDate:"2026-01-28",payDate:"2026-02-05",registrar:"Coronation",status:"paid"},
+  {ticker:"MOFI1",name:"MoFI REIT I",sector:"REIT",divPS:3.75,type:"Distribution",qualDate:"2026-02-20",payDate:"2026-02-27",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"MOFI2",name:"MoFI REIT II",sector:"REIT",divPS:9.72,type:"Distribution",qualDate:"2026-02-20",payDate:"2026-02-27",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"VITAFOAM",name:"Vitafoam Nigeria",sector:"Consumer",divPS:3.00,type:"Final",qualDate:"2026-02-06",payDate:"2026-03-05",registrar:"Meristem",bonus:"1 for 5",status:"paid"},
+  {ticker:"TRANSCOHOT",name:"Transcorp Hotels",sector:"Hospitality",divPS:1.20,type:"Final",qualDate:"2026-02-13",payDate:"2026-02-27",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"AFRIPRUDE",name:"Africa Prudential",sector:"Financial",divPS:0.50,type:"Final",qualDate:"2026-03-12",payDate:"2026-04-02",registrar:"Africa Prudential",status:"paid"},
+  // ── April 2026 ──
+  {ticker:"NASCON",name:"NASCON Allied Industries",sector:"Consumer",divPS:6.00,type:"Final",qualDate:"2026-04-01",payDate:"2026-04-28",registrar:"Meristem",status:"paid"},
+  {ticker:"WAPCO",name:"Lafarge Africa",sector:"Industrial",divPS:6.00,type:"Final",qualDate:"2026-04-03",payDate:"2026-04-30",registrar:"CardinalStone",status:"paid"},
+  {ticker:"CWG",name:"CWG Plc",sector:"Technology",divPS:0.70,type:"Final",qualDate:"2026-04-07",payDate:"2026-04-17",registrar:"Cordros",status:"paid"},
+  {ticker:"UCAP",name:"United Capital",sector:"Financial",divPS:1.00,type:"Final",qualDate:"2026-04-07",payDate:"2026-04-24",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"MTNN",name:"MTN Nigeria",sector:"Telecoms",divPS:20.00,type:"Final",qualDate:"2026-04-08",payDate:"2026-05-05",registrar:"Coronation",status:"paid"},
+  {ticker:"NGXGROUP",name:"NGX Group (FY2025 Final)",sector:"Financial",divPS:3.00,type:"Final",qualDate:"2026-04-10",payDate:"2026-04-29",registrar:"Datamax",bonus:"1 for 3",status:"paid"},
+  {ticker:"UNILEVER",name:"Unilever Nigeria",sector:"Consumer",divPS:3.25,type:"Final",qualDate:"2026-04-10",payDate:"2026-05-08",registrar:"Greenwich",status:"paid"},
+  {ticker:"GTCO",name:"GTCO Plc",sector:"Banking",divPS:12.76,type:"Final",qualDate:"2026-04-13",payDate:"2026-04-28",registrar:"Datamax",status:"paid"},
+  {ticker:"ETERNA",name:"Eterna Plc",sector:"Energy",divPS:0.50,type:"Final",qualDate:"2026-04-13",payDate:"2026-05-12",registrar:"Greenwich",status:"paid"},
+  {ticker:"GEREGU",name:"Geregu Power",sector:"Energy",divPS:9.00,type:"Final",qualDate:"2026-04-13",payDate:"2026-04-30",registrar:"Meristem",status:"paid"},
+  {ticker:"TRANSCORP",name:"Transcorp Power",sector:"Energy",divPS:5.50,type:"Final",qualDate:"2026-04-13",payDate:"2026-04-28",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"CUSTODIAN",name:"Custodian Investment",sector:"Insurance",divPS:2.50,type:"Final",qualDate:"2026-04-13",payDate:"2026-05-08",registrar:"Meristem",status:"paid"},
+  {ticker:"NEM",name:"NEM Insurance",sector:"Insurance",divPS:1.50,type:"Final",qualDate:"2026-04-14",payDate:"2026-05-14",registrar:"Apel Capital",status:"paid"},
+  {ticker:"FIDSON",name:"Fidson Healthcare",sector:"Healthcare",divPS:1.50,type:"Final",qualDate:"2026-04-14",payDate:"2026-07-31",registrar:"Meristem",status:"paid"},
+  {ticker:"ZENITHBANK",name:"Zenith Bank",sector:"Banking",divPS:10.00,type:"Final",qualDate:"2026-04-24",payDate:"2026-05-05",registrar:"Veritas",status:"paid"},
+  {ticker:"OKOMUOIL",name:"Okomu Oil Palm",sector:"Agriculture",divPS:15.00,type:"Final",qualDate:"2026-04-27",payDate:"2026-05-26",registrar:"CardinalStone",status:"paid"},
+  {ticker:"TRANSCORPN",name:"Transcorp Nigeria",sector:"Conglomerate",divPS:1.60,type:"Final",qualDate:"2026-04-27",payDate:"2026-05-08",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"WEMABANK",name:"Wema Bank",sector:"Banking",divPS:1.25,type:"Final",qualDate:"2026-04-29",payDate:"2026-05-20",registrar:"Greenwich",status:"paid"},
+  // ── May 2026 ──
+  {ticker:"STANBIC",name:"Stanbic IBTC Holdings",sector:"Banking",divPS:4.00,type:"Final",qualDate:"2026-05-04",payDate:"2026-05-26",registrar:"First Registrars",status:"paid"},
+  {ticker:"VFDGRP",name:"VFD Group",sector:"Financial",divPS:0.25,type:"Final",qualDate:"2026-05-04",payDate:"2026-05-25",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"NAHCO",name:"NAHCO Plc",sector:"Aviation",divPS:6.25,type:"Final",qualDate:"2026-05-01",payDate:"2026-05-15",registrar:"CardinalStone",bonus:"1 for 7",status:"paid"},
+  {ticker:"BUACEMENT",name:"BUA Cement",sector:"Industrial",divPS:10.00,type:"Final",qualDate:"2026-05-08",payDate:"2026-05-21",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"SEPLAT",name:"Seplat Energy (USD)",sector:"Energy",divPS:0.083,type:"Final",qualDate:"2026-05-15",payDate:"2026-05-29",registrar:"Datamax",currency:"USD",status:"paid"},
+  {ticker:"MAYBAKER",name:"May & Baker Nigeria",sector:"Healthcare",divPS:0.50,type:"Final",qualDate:"2026-05-19",payDate:"2026-06-04",registrar:"Veritas",status:"paid"},
+  {ticker:"NPFMCRFBK",name:"NPF Microfinance Bank",sector:"Banking",divPS:0.20,type:"Final",qualDate:"2026-05-19",payDate:"2026-06-11",registrar:"Datamax",status:"paid"},
+  {ticker:"AIICO",name:"AIICO Insurance",sector:"Insurance",divPS:0.12,type:"Final",qualDate:"2026-05-27",payDate:"2026-06-05",registrar:"Coronation",status:"paid"},
+  {ticker:"JULBERGER",name:"Julius Berger",sector:"Construction",divPS:4.25,type:"Final",qualDate:"2026-05-29",payDate:"2026-06-19",registrar:"Greenwich",status:"paid"},
+  {ticker:"ABCTRANS",name:"ABC Transport",sector:"Transport",divPS:0.06,type:"Final",qualDate:"2026-05-22",payDate:"2026-07-01",registrar:"First",status:"paid"},
+  // ── June 2026 ──
+  {ticker:"SAHCO",name:"SAHCO Plc",sector:"Aviation",divPS:1.20,type:"Final",qualDate:"2026-06-02",payDate:"2026-06-25",registrar:"Apel Registrars",status:"paid"},
+  {ticker:"JAIZBANK",name:"Jaiz Bank",sector:"Banking",divPS:0.11,type:"Final",qualDate:"2026-06-02",payDate:"2026-08-01",registrar:"—",status:"paid"},
+  {ticker:"CAP",name:"CAP Plc",sector:"Industrial",divPS:4.00,type:"Final",qualDate:"2026-06-03",payDate:"2026-06-25",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"BETAGLAS",name:"Beta Glass",sector:"Industrial",divPS:7.20,type:"Final",qualDate:"2026-06-03",payDate:"2026-06-25",registrar:"Greenwich",status:"paid"},
+  {ticker:"BUAFOODS",name:"BUA Foods",sector:"Consumer",divPS:28.00,type:"Final",qualDate:"2026-06-04",payDate:"2026-07-15",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"IMG",name:"Industrial & Medical Gases",sector:"Industrial",divPS:0.50,type:"Final",qualDate:"2026-06-04",payDate:"2026-06-24",registrar:"Lancelot",status:"paid"},
+  {ticker:"ETI",name:"Ecobank Transnational",sector:"Banking",divPS:2.40,type:"Final",qualDate:"2026-06-12",payDate:"2026-06-30",registrar:"Greenwich",status:"paid"},
+  {ticker:"UACN",name:"UACN Plc",sector:"Conglomerate",divPS:1.00,type:"Final",qualDate:"2026-06-11",payDate:"2026-06-26",registrar:"Africa Prudential",status:"paid"},
+  {ticker:"CHAMS",name:"CHAMS Holding",sector:"Technology",divPS:0.03,type:"Final",qualDate:"2026-06-18",payDate:"2026-07-10",registrar:"First",status:"paid"},
+  // ── July/August 2026 ──
+  {ticker:"DANGCEM",name:"Dangote Cement",sector:"Industrial",divPS:45.00,type:"Final",qualDate:"2026-06-17",payDate:"2026-07-02",registrar:"Coronation",status:"paid"},
+  {ticker:"IKEJATL",name:"Ikeja Hotel",sector:"Hospitality",divPS:0.30,type:"Final",qualDate:"2026-07-03",payDate:"2026-08-03",registrar:"Greenwich",status:"recent"},
+  {ticker:"ETRANZACT",name:"E-Tranzact International",sector:"Technology",divPS:0.125,type:"Final",qualDate:"2026-07-06",payDate:"2026-07-23",registrar:"Meristem",status:"paid"},
+  {ticker:"NGXGROUP",name:"NGX Group (H1 2026 Interim)",sector:"Financial",divPS:1.30,type:"Interim",qualDate:"2026-07-29",payDate:"2026-08-05",registrar:"Datamax",status:"recent"},
+  {ticker:"MCNICHOLS",name:"McNichols Plc",sector:"Consumer",divPS:0.06,type:"Final",qualDate:"2026-06-29",payDate:"2026-08-06",registrar:"Coronation",status:"upcoming"},
+  // ── Pending / TBC ──
+  {ticker:"ARADEL",name:"Aradel Holdings",sector:"Energy",divPS:23.00,type:"Final",qualDate:"TBC",payDate:"TBC",registrar:"—",status:"pending"},
+  {ticker:"PRESCO",name:"Presco Plc",sector:"Agriculture",divPS:14.66,type:"Final",qualDate:"TBC",payDate:"TBC",registrar:"—",status:"pending"},
+  {ticker:"UPDC_REIT",name:"UPDC REIT",sector:"REIT",divPS:0.33,type:"Distribution",qualDate:"TBC",payDate:"TBC",registrar:"First",status:"pending"},
+  {ticker:"MBENEFIT",name:"Mutual Benefits Assurance",sector:"Insurance",divPS:0.05,type:"Final",qualDate:"2026-07-25",payDate:"2026-08-08",registrar:"—",status:"recent"},
+  {ticker:"DANGREFINERY",name:"Dangote Refinery (IPO 2026)",sector:"Energy",divPS:0,type:"Pending",qualDate:"TBC",payDate:"TBC",registrar:"TBD",status:"pending"},
+];
+
+const DIVMAP = {};DIVDATA.forEach(d=>{DIVMAP[d.ticker]=d;});
+
+let portfolio = [];
+let calFilter = 'all';
+
+function addStock(){
+  const ticker = document.getElementById('stock-select').value;
+  const shares = parseInt(document.getElementById('shares-input').value)||0;
+  if(!ticker){alert('Please select a stock.');return;}
+  if(!shares||shares<1){alert('Please enter a valid number of shares.');return;}
+  if(portfolio.find(p=>p.ticker===ticker)){alert('Stock already in portfolio. Remove it first to update.');return;}
+  if(!DIVDATA.find(d=>d.ticker===ticker)){alert('Stock data not found.');return;}
+  portfolio.push({ticker, shares});
+  document.getElementById('stock-select').value='';
+  document.getElementById('shares-input').value='';
+  renderPortfolio();
+  renderCalendar();
+  renderSummary();
+}
+
+function removeStock(ticker){
+  portfolio = portfolio.filter(p=>p.ticker!==ticker);
+  renderPortfolio();
+  renderCalendar();
+  renderSummary();
+}
+
+function renderPortfolio(){
+  const wrap = document.getElementById('portfolio-table-wrap');
+  if(!portfolio.length){
+    wrap.innerHTML='<div class="empty-state">📊 Add your stocks above to see your dividend calendar</div>';
+    document.getElementById('summary-grid').style.display='none';
+    return;
+  }
+  document.getElementById('summary-grid').style.display='grid';
+  wrap.innerHTML=`<table class="portfolio-table">
+    <thead><tr>
+      <th>Stock</th><th>Company</th><th>Shares</th><th>Div/Share</th><th>Est. Income</th><th></th>
+    </tr></thead>
+    <tbody>${portfolio.map(p=>{
+      const d = DIVDATA.find(dd=>dd.ticker===p.ticker)||{};
+      const income = d.divPS * p.shares;
+      return `<tr>
+        <td><strong>${p.ticker}</strong></td>
+        <td style="color:var(--text-mid);font-size:13px;">${d.name}</td>
+        <td>${p.shares.toLocaleString()}</td>
+        <td>₦${d.divPS.toFixed(2)}</td>
+        <td style="font-weight:700;color:var(--green);">₦${income.toLocaleString()}</td>
+        <td><button class="remove-btn" onclick="removeStock('${p.ticker}')">✕</button></td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>`;
+}
+
+function renderSummary(){
+  if(!portfolio.length) return;
+  const totalAnnual = portfolio.reduce((sum,p)=>{const d=DIVDATA.find(dd=>dd.ticker===p.ticker);return sum+(d?d.divPS*p.shares:0);},0);
+  document.getElementById('s-stocks').textContent = portfolio.length;
+  document.getElementById('s-annual').textContent = '₦'+Math.round(totalAnnual).toLocaleString();
+  document.getElementById('s-monthly').textContent = '₦'+Math.round(totalAnnual/12).toLocaleString();
+  const now = new Date();
+  const upcoming = portfolio
+    .map(p=>{const d=DIVDATA.find(dd=>dd.ticker===p.ticker)||{};return {ticker:p.ticker,...d};})
+    .filter(d=>new Date(d.payDate)>now)
+    .sort((a,b)=>new Date(a.payDate)-new Date(b.payDate));
+  if(upcoming.length){
+    const days = Math.ceil((new Date(upcoming[0].payDate)-now)/86400000);
+    document.getElementById('s-next').textContent = days+' days';
+  } else {
+    document.getElementById('s-next').textContent = 'None upcoming';
+  }
+}
+
+function renderCalendar(){
+  const now = new Date();
+  let data = [...DIVDATA];
+  if(calFilter==='upcoming') data=data.filter(d=>new Date(d.payDate)>now);
+  if(calFilter==='my') data=data.filter(d=>portfolio.find(p=>p.ticker===d.ticker));
+  data.sort((a,b)=>{
+    if(a.payDate==='TBC') return 1;
+    if(b.payDate==='TBC') return -1;
+    return new Date(a.payDate)-new Date(b.payDate);
+  });
+  data.sort((a,b)=>new Date(a.payDate)-new Date(b.payDate));
+
+  const body = document.getElementById('cal-body');
+  if(!data.length){
+    body.innerHTML='<div class="no-dividend">No dividends to display for the selected filter.</div>';
+    return;
+  }
+
+  body.innerHTML = data.map(d=>{
+    const payD = new Date(d.payDate);
+    const exD = new Date(d.exDate);
+    const isPast = payD < now;
+    const isUpcoming = payD > now;
+    const myHolding = portfolio.find(p=>p.ticker===d.ticker);
+    const myIncome = myHolding ? ((d.divPS||0) * myHolding.shares) : 0;
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    return `<div class="dividend-row">
+      <div class="div-date-box ${isPast?'past':isUpcoming?'upcoming':''}">
+        <div class="div-month">${months[payD.getMonth()]}</div>
+        <div class="div-day">${payD.getDate()}</div>
+      </div>
+      <div class="div-info">
+        <div class="div-stock">${d.ticker}</div>
+        <div class="div-name">${d.name}</div>
+        <span class="div-type type-${d.type}">${d.type}</span>
+      </div>
+      <div class="div-amount-col">
+        <div class="div-amount">${d.currency==='USD'?'$'+d.divPS.toFixed(3):d.divPS>0?'₦'+d.divPS.toFixed(2)+'/share':'Pending'}</div>
+        ${d.bonus?`<div style="font-size:10px;color:var(--purple);font-weight:700;margin-top:2px;">+ Bonus ${d.bonus}</div>`:''}
+        ${d.status==='recent'?'<div style="font-size:10px;color:var(--green);font-weight:700;">🟢 Just Paid</div>':''}
+        ${d.status==='pending'?'<div style="font-size:10px;color:var(--amber,#D97706);font-weight:700;">⏳ Awaiting Date</div>':''}
+        <div class="div-yield">${d.yield>0?d.yield.toFixed(1)+'% yield':'—'}</div>
+        ${myIncome>0?`<div class="div-my-income">My income: ₦${myIncome.toLocaleString()}</div>`:''}
+        <div class="div-status">Ex-div: ${exD.toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterCal(f,btn){
+  calFilter=f;
+  document.querySelectorAll('.cal-filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCalendar();
+}
+
+renderCalendar();
+</script>
+</body>
+</html>

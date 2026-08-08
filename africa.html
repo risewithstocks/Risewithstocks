@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pan-African Investor Hub — Rise With Stocks</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
+:root{--navy:#0B1120;--gold:#C8860A;--gold-bright:#F5A623;--gold-light:#FFD166;--gold-pale:#FFF8E8;--white:#FFFFFF;--off-white:#F8F7F4;--cream:#FDF9F0;--text:#1A1A2E;--text-mid:#444466;--text-light:#888899;--border:#E8E4DA;--green:#16A34A;--green-light:#DCFCE7;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);}
+
+/* ── UNIVERSAL NAV ── */
+.site-nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  gap: 16px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(200,134,10,0.3);
+}
+.nav-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.nav-logo-text span { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+}
+.nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  text-decoration: none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  transition: all 0.15s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav-link:hover { background: var(--off-white); color: var(--navy); }
+.nav-link.active { background: var(--navy); color: var(--gold-light); }
+
+.nav-cta-wrap { flex-shrink: 0; }
+.nav-cta {
+  background: linear-gradient(135deg, #F5A623, #C8860A, #F5A623);
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 13px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(200,134,10,0.3);
+  white-space: nowrap;
+  display: block;
+}
+
+/* ── HAMBURGER ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--white);
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+/* ── MOBILE DRAWER ── */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 300;
+}
+.nav-drawer.open { display: block; }
+.nav-drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11,17,32,0.6);
+  backdrop-filter: blur(2px);
+}
+.nav-drawer-panel {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: min(300px, 85vw);
+  background: var(--white);
+  padding: 0;
+  overflow-y: auto;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+}
+.nav-drawer-header {
+  background: var(--navy);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-drawer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-drawer-logo img { height: 36px; width: 36px; border-radius: 50%; }
+.nav-drawer-logo span {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+}
+.nav-drawer-logo span em { color: var(--gold-light); font-style: normal; }
+.nav-drawer-close {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+.nav-drawer-links { padding: 16px; }
+.nav-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-mid);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  transition: all 0.15s;
+}
+.nav-drawer-link:hover { background: var(--off-white); color: var(--navy); }
+.nav-drawer-link.active { background: var(--navy); color: var(--gold-light); }
+.nav-drawer-link .icon { font-size: 18px; width: 24px; text-align: center; }
+.nav-drawer-divider { height: 1px; background: var(--border); margin: 12px 0; }
+.nav-drawer-cta {
+  display: block;
+  margin: 16px;
+  background: linear-gradient(135deg, #F5A623, #C8860A, #F5A623);
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 800;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(200,134,10,0.35);
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-cta-wrap { display: none; }
+  .nav-hamburger { display: flex; }
+}
+@media (max-width: 400px) {
+  .nav-logo-text { display: none; }
+}
+
+.hero{background:var(--navy);padding:64px 24px 52px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'🌍';font-size:200px;position:absolute;right:-30px;top:-20px;opacity:.05;line-height:1;}
+.eyebrow{display:inline-block;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:18px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,52px);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:14px;}
+.hero h1 em{color:var(--gold-light);font-style:normal;}
+.hero p{color:rgba(255,255,255,.6);font-size:16px;max-width:560px;margin:0 auto 28px;line-height:1.75;}
+.hero-stats{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+.hero-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 18px;text-align:center;}
+.hero-stat strong{display:block;font-size:22px;font-weight:900;color:var(--gold-light);line-height:1;}
+.hero-stat span{font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px;}
+.main{max-width:900px;margin:0 auto;padding:0 24px;}
+
+/* COUNTRY SELECTOR */
+.country-selector{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:32px 0 40px;}
+.country-btn{background:var(--white);border:2px solid var(--border);border-radius:14px;padding:18px 12px;text-align:center;cursor:pointer;transition:all .2s;text-decoration:none;color:var(--text);}
+.country-btn:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 16px rgba(200,134,10,.1);}
+.country-btn.active{border-color:var(--gold);background:var(--gold-pale);}
+.country-flag{font-size:32px;margin-bottom:8px;}
+.country-name{font-size:13px;font-weight:700;color:var(--navy);}
+.country-exchange{font-size:11px;color:var(--text-light);margin-top:3px;}
+
+/* COUNTRY PANELS */
+.country-panel{display:none;animation:fadeIn .3s ease;}
+.country-panel.show{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.panel-hero{border-radius:16px;overflow:hidden;margin-bottom:24px;}
+.panel-header{padding:28px;color:var(--white);}
+.panel-header h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;margin-bottom:8px;}
+.panel-header p{font-size:15px;opacity:.8;line-height:1.65;}
+.panel-body{background:var(--white);border:1px solid var(--border);border-radius:0 0 16px 16px;padding:24px;}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px;}
+.info-box{background:var(--off-white);border-radius:10px;padding:16px;}
+.info-label{font-size:10px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+.info-val{font-size:15px;font-weight:800;color:var(--navy);}
+.info-val.gold{color:var(--gold);}
+
+/* HOW TO INVEST */
+.steps{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--off-white);border-radius:10px;padding:16px;}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--gold-light);font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-text h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.step-text p{font-size:13px;color:var(--text-mid);line-height:1.6;}
+
+/* HOOK BOX */
+.hook-box{background:var(--navy);border-radius:12px;padding:22px;margin-bottom:24px;display:flex;align-items:center;gap:16px;}
+.hook-icon{font-size:36px;flex-shrink:0;}
+.hook-text h3{font-size:16px;font-weight:800;color:var(--gold-light);margin-bottom:5px;}
+.hook-text p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.6;}
+
+.shine-btn{position:relative;background:linear-gradient(135deg,#F5A623,#C8860A,#F5A623);color:var(--navy);font-size:16px;font-weight:900;padding:16px 32px;border-radius:12px;border:none;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 16px rgba(200,134,10,.4);overflow:hidden;text-decoration:none;display:inline-block;transition:all .2s;}
+.shine-btn::before{content:'';position:absolute;top:-50%;left:-75%;width:50%;height:200%;background:linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,.45),rgba(255,255,255,0));transform:skewX(-20deg);animation:shimmer 2.5s infinite;}
+@keyframes shimmer{0%{left:-75%}100%{left:125%}}
+.full-width{width:100%;text-align:center;}
+.section-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+.section-sub{font-size:14px;color:var(--text-mid);margin-bottom:20px;}
+footer{background:var(--navy);padding:28px 24px;text-align:center;margin-top:48px;}
+footer p{font-size:11px;color:rgba(255,255,255,.35);line-height:1.8;}
+footer a{color:var(--gold-light);text-decoration:none;}
+.footer-logo{margin-bottom:12px;}
+@media(max-width:600px){.country-selector{grid-template-columns:repeat(3,1fr);}.hero-stats{gap:6px;}}
+</style>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+</head>
+<body>
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="data:image/png;base64,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" alt="Rise With Stocks">
+      <span class="nav-logo-text">Rise With <span>Stocks</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="nav-link" data-page="home">🏠 Home</a>
+      <a href="/calculator.html" class="nav-link" data-page="calculator">📊 Calculator</a>
+      <a href="/ips.html" class="nav-link" data-page="ips">📋 IPS Generator</a>
+      <a href="/glossary.html" class="nav-link" data-page="glossary">📖 Glossary</a>
+      <a href="/brokers.html" class="nav-link" data-page="brokers">🏦 Brokers</a>
+    </div>
+    <div class="nav-cta-wrap">
+      <a href="https://nestuge.com/uuowodqkx" class="nav-cta">Get Playbook ₦4,500 →</a>
+    </div>
+    <button class="nav-hamburger" onclick="openDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="nav-drawer-panel">
+    <div class="nav-drawer-header">
+      <a href="/" class="nav-drawer-logo">
+        <img src="data:image/png;base64,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" alt="Rise With Stocks">
+        <span>Rise With <em>Stocks</em></span>
+      </a>
+      <button class="nav-drawer-close" onclick="closeDrawer()">×</button>
+    </div>
+    <div class="nav-drawer-links">
+      <a href="/" class="nav-drawer-link" data-page="home"><span class="icon">🏠</span> Home</a>
+      <a href="/calculator.html" class="nav-drawer-link" data-page="calculator"><span class="icon">📊</span> IPO Calculator</a>
+      <a href="/ips.html" class="nav-drawer-link" data-page="ips"><span class="icon">📋</span> IPS Generator</a>
+      <a href="/glossary.html" class="nav-drawer-link" data-page="glossary"><span class="icon">📖</span> Glossary</a>
+      <a href="/brokers.html" class="nav-drawer-link" data-page="brokers"><span class="icon">🏦</span> Broker Comparison</a>
+      <div class="nav-drawer-divider"></div>
+      <a href="https://nestuge.com/of4u8aqba" class="nav-drawer-link"><span class="icon">🎁</span> Free FAQ Guide</a>
+      <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t" class="nav-drawer-link"><span class="icon">📢</span> WhatsApp Channel</a>
+    </div>
+    <a href="https://nestuge.com/uuowodqkx" class="nav-drawer-cta">Get the Playbook — ₦4,500 →</a>
+  </div>
+</div>
+
+<script>
+// Active page highlighting
+(function(){
+  const path = window.location.pathname;
+  const page = path.includes('calculator')?'calculator':
+               path.includes('ips')?'ips':
+               path.includes('glossary')?'glossary':
+               path.includes('brokers')?'brokers':'home';
+  document.querySelectorAll('[data-page="'+page+'"]').forEach(el=>el.classList.add('active'));
+})();
+
+function openDrawer(){
+  document.getElementById('nav-drawer').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  document.getElementById('nav-drawer').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+</script>
+<section class="hero">
+  <div class="eyebrow">Pan-African Investor Hub</div>
+  <h1>Africa's Biggest IPO<br>Is <em>For All of Us</em></h1>
+  <p>The Dangote Refinery IPO lists simultaneously across 6 exchanges in 15 countries. Select your country and find out exactly how to participate.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><strong>6</strong><span>Exchanges</span></div>
+    <div class="hero-stat"><strong>15</strong><span>Countries</span></div>
+    <div class="hero-stat"><strong>$5B</strong><span>Target Raise</span></div>
+    <div class="hero-stat"><strong>$39.1B</strong><span>Valuation</span></div>
+    <div class="hero-stat"><strong>Sept</strong><span>2026</span></div>
+  </div>
+</section>
+
+<div class="main">
+  <div style="padding-top:32px;text-align:center;">
+    <div class="section-title">Select Your Country</div>
+    <div class="section-sub">Get specific guidance for your market — exchange, broker, process, and currency</div>
+  </div>
+
+  <div class="country-selector">
+    <div class="country-btn active" onclick="showCountry('ng',this)"><div class="country-flag">🇳🇬</div><div class="country-name">Nigeria</div><div class="country-exchange">NGX — Primary</div></div>
+    <div class="country-btn" onclick="showCountry('za',this)"><div class="country-flag">🇿🇦</div><div class="country-name">South Africa</div><div class="country-exchange">JSE — Secondary</div></div>
+    <div class="country-btn" onclick="showCountry('ke',this)"><div class="country-flag">🇰🇪</div><div class="country-name">Kenya</div><div class="country-exchange">NSE — Secondary</div></div>
+    <div class="country-btn" onclick="showCountry('gh',this)"><div class="country-flag">🇬🇭</div><div class="country-name">Ghana</div><div class="country-exchange">GSE — Secondary</div></div>
+    <div class="country-btn" onclick="showCountry('et',this)"><div class="country-flag">🇪🇹</div><div class="country-name">Ethiopia</div><div class="country-exchange">ESX — Secondary</div></div>
+    <div class="country-btn" onclick="showCountry('brvm',this)"><div class="country-flag">🌍</div><div class="country-name">BRVM</div><div class="country-exchange">8 Countries</div></div>
+  </div>
+
+  <!-- NIGERIA -->
+  <div class="country-panel show" id="panel-ng">
+    <div class="panel-hero">
+      <div class="panel-header" style="background:linear-gradient(135deg,#008751,#003F20);">
+        <h2>🇳🇬 Nigeria — Primary Listing</h2>
+        <p>Nigeria is where the IPO starts. The primary listing on the NGX is the main event — and Nigerian retail investors have the most direct access.</p>
+      </div>
+      <div class="panel-body">
+        <div class="info-grid">
+          <div class="info-box"><div class="info-label">Exchange</div><div class="info-val">NGX (Nigerian Exchange)</div></div>
+          <div class="info-box"><div class="info-label">Currency</div><div class="info-val">Nigerian Naira (₦)</div></div>
+          <div class="info-box"><div class="info-label">Est. Offer Price</div><div class="info-val gold">₦620 – ₦780</div></div>
+          <div class="info-box"><div class="info-label">Min. Investment</div><div class="info-val gold">₦5,000+</div></div>
+          <div class="info-box"><div class="info-label">Listing Type</div><div class="info-val">Primary</div></div>
+          <div class="info-box"><div class="info-label">Required Docs</div><div class="info-val">BVN · NIN · CHN · CSCS</div></div>
+        </div>
+        <div class="hook-box">
+          <div class="hook-icon">⭐</div>
+          <div class="hook-text">
+            <h3>4 Officially Appointed Brokers</h3>
+            <p>Zedcrest Securities · Stanbic IBTC · Vetiva Securities · FirstCap Securities. Only these 4 submit applications directly to the issuing house.</p>
+          </div>
+        </div>
+        <h3 style="font-size:16px;font-weight:800;color:var(--navy);margin-bottom:14px;">How to Invest from Nigeria</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Open a Brokerage Account</h4><p>Download your chosen broker's app. Upload BVN, NIN, and passport photo. Account opens within 1–2 days.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Get Your CHN & CSCS Number</h4><p>Your broker will assign your Clearing House Number (CHN) and CSCS account. These are required for your application to be valid.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Fund Your Wallet</h4><p>Transfer money into your brokerage wallet before the subscription window opens. The funds must be there before you apply.</p></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-text"><h4>Apply During the Window</h4><p>When the window opens in September, submit your application through your broker's app. Apply early.</p></div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-text"><h4>Receive Allotment</h4><p>Shares are credited to your CSCS account. Unallotted funds are refunded within 4–8 weeks.</p></div></div>
+        </div>
+        <a href="https://nestuge.com/uuowodqkx" class="shine-btn full-width">Get the Full Nigeria IPO Guide — ₦4,500 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOUTH AFRICA -->
+  <div class="country-panel" id="panel-za">
+    <div class="panel-hero">
+      <div class="panel-header" style="background:linear-gradient(135deg,#007A4D,#002395);">
+        <h2>🇿🇦 South Africa — JSE Secondary Listing</h2>
+        <p>Africa's richest country and most sophisticated stock market. The JSE secondary listing opens the Dangote IPO to South African investors and institutions.</p>
+      </div>
+      <div class="panel-body">
+        <div class="info-grid">
+          <div class="info-box"><div class="info-label">Exchange</div><div class="info-val">JSE (Johannesburg SE)</div></div>
+          <div class="info-box"><div class="info-label">Currency</div><div class="info-val">South African Rand (R)</div></div>
+          <div class="info-box"><div class="info-label">Listing Type</div><div class="info-val">Secondary</div></div>
+          <div class="info-box"><div class="info-label">Target Raise</div><div class="info-val gold">Part of $5B total</div></div>
+          <div class="info-box"><div class="info-label">Status</div><div class="info-val">Filing submitted ✅</div></div>
+          <div class="info-box"><div class="info-label">Required</div><div class="info-val">JSE-registered broker</div></div>
+        </div>
+        <div class="hook-box">
+          <div class="hook-icon">💡</div>
+          <div class="hook-text">
+            <h3>Why South Africa?</h3>
+            <p>The JSE is Africa's largest stock exchange by market cap. South African investors manage the continent's biggest pension funds. Institutional interest in the Dangote IPO from SA is enormous.</p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Open a JSE-Registered Broker Account</h4><p>Use any FSP (Financial Services Provider) licensed by the FSCA. Major JSE brokers include EasyEquities, Sanlam, and PSG Securities.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Watch for the JSE Listing Announcement</h4><p>The JSE secondary listing terms will be announced alongside the NGX primary listing. Pricing will be in Rand at the equivalent rate.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Subscribe Through Your SA Broker</h4><p>Applications can be submitted through your JSE broker's platform during the same subscription window.</p></div></div>
+        </div>
+        <a href="https://nestuge.com/uuowodqkx" class="shine-btn full-width">Get the Full Pan-African IPO Guide — ₦4,500 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- KENYA -->
+  <div class="country-panel" id="panel-ke">
+    <div class="panel-hero">
+      <div class="panel-header" style="background:linear-gradient(135deg,#006600,#BB0000);">
+        <h2>🇰🇪 Kenya — NSE Secondary Listing</h2>
+        <p>East Africa's financial capital. Kenya brings institutional muscle — with up to $500M expected from Kenyan pension funds and investment institutions alone.</p>
+      </div>
+      <div class="panel-body">
+        <div class="info-grid">
+          <div class="info-box"><div class="info-label">Exchange</div><div class="info-val">NSE (Nairobi Securities)</div></div>
+          <div class="info-box"><div class="info-label">Currency</div><div class="info-val">Kenyan Shilling (KSh)</div></div>
+          <div class="info-box"><div class="info-label">Listing Type</div><div class="info-val">Secondary</div></div>
+          <div class="info-box"><div class="info-label">Kenyan Inst. Demand</div><div class="info-val gold">Up to $500M</div></div>
+          <div class="info-box"><div class="info-label">Status</div><div class="info-val">Filing in progress</div></div>
+          <div class="info-box"><div class="info-label">Regulator</div><div class="info-val">CMA Kenya</div></div>
+        </div>
+        <div class="hook-box">
+          <div class="hook-icon">📈</div>
+          <div class="hook-text">
+            <h3>Kenya's Investor Appetite is Real</h3>
+            <p>Kenyan institutions are committing up to $500M to the Dangote IPO. The M-Pesa generation is digitally active and investing-savvy. Retail participation from Kenya is expected to be significant.</p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Open an NSE-Licensed Broker Account</h4><p>Use any CMA-licensed stockbroker. Major Kenyan brokers include Faida Investment Bank, SBG Securities, and AIB-AXYS Africa.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Get a CDS Account</h4><p>Central Depository System (CDS) is Kenya's equivalent of Nigeria's CSCS. You need this account for shares to be credited after allotment.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Subscribe During the Window</h4><p>When the NSE listing terms are announced, apply through your Kenyan broker's platform.</p></div></div>
+        </div>
+        <a href="https://nestuge.com/uuowodqkx" class="shine-btn full-width">Get the Full Pan-African IPO Guide — ₦4,500 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- GHANA -->
+  <div class="country-panel" id="panel-gh">
+    <div class="panel-hero">
+      <div class="panel-header" style="background:linear-gradient(135deg,#006B3F,#FCD116,#CE1126)" style="background:linear-gradient(135deg,#006B3F,#004d2d);">
+        <h2>🇬🇭 Ghana — GSE Secondary Listing</h2>
+        <p>The Dangote Refinery already supplies Ghana's fuel. Now Ghanaians can own a piece of it. The GSE secondary listing gives Ghana direct access to this historic opportunity.</p>
+      </div>
+      <div class="panel-body">
+        <div class="info-grid">
+          <div class="info-box"><div class="info-label">Exchange</div><div class="info-val">GSE (Ghana Stock Exchange)</div></div>
+          <div class="info-box"><div class="info-label">Currency</div><div class="info-val">Ghanaian Cedi (GH₵)</div></div>
+          <div class="info-box"><div class="info-label">Listing Type</div><div class="info-val">Secondary</div></div>
+          <div class="info-box"><div class="info-label">Status</div><div class="info-val">Filing in progress</div></div>
+          <div class="info-box"><div class="info-label">Regulator</div><div class="info-val">SEC Ghana</div></div>
+          <div class="info-box"><div class="info-label">Key Fact</div><div class="info-val gold">Already supplies Ghana fuel</div></div>
+        </div>
+        <div class="hook-box">
+          <div class="hook-icon">⛽</div>
+          <div class="hook-text">
+            <h3>Ghana's Direct Connection</h3>
+            <p>The Dangote Refinery already exports refined petroleum products to Ghana. Every time fuel is pumped in Ghana, Dangote earns revenue. Ghanaian investors can now own a share of those earnings.</p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Open a GSE-Licensed Broker Account</h4><p>Use any SEC Ghana-licensed broker. Major Ghanaian brokers include Databank, CDH Securities, and IC Securities.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Get a CSD Account</h4><p>Ghana's Central Securities Depository (CSD) account is required to hold shares. Your broker will help you set this up.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Subscribe During the Window</h4><p>Watch for the GSE listing announcement and apply through your Ghanaian broker.</p></div></div>
+        </div>
+        <a href="https://nestuge.com/uuowodqkx" class="shine-btn full-width">Get the Full Pan-African IPO Guide — ₦4,500 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ETHIOPIA -->
+  <div class="country-panel" id="panel-et">
+    <div class="panel-hero">
+      <div class="panel-header" style="background:linear-gradient(135deg,#078930,#FCDD09,#DA121A)" style="background:linear-gradient(135deg,#078930,#055a20);">
+        <h2>🇪🇹 Ethiopia — ESX Secondary Listing</h2>
+        <p>Africa's second most populous country now has its own stock exchange. The Ethiopian Securities Exchange (ESX) launched in 2024 and the Dangote IPO is one of its first major international listings.</p>
+      </div>
+      <div class="panel-body">
+        <div class="info-grid">
+          <div class="info-box"><div class="info-label">Exchange</div><div class="info-val">ESX (Ethiopian Securities)</div></div>
+          <div class="info-box"><div class="info-label">Currency</div><div class="info-val">Ethiopian Birr (ETB)</div></div>
+          <div class="info-box"><div class="info-label">Listing Type</div><div class="info-val">Secondary</div></div>
+          <div class="info-box"><div class="info-label">ESX Founded</div><div class="info-val">2024 (New)</div></div>
+          <div class="info-box"><div class="info-label">Population</div><div class="info-val gold">120M+ investors</div></div>
+          <div class="info-box"><div class="info-label">Status</div><div class="info-val">Filing in progress</div></div>
+        </div>
+        <div class="hook-box">
+          <div class="hook-icon">🚀</div>
+          <div class="hook-text">
+            <h3>A Historic First for Ethiopia</h3>
+            <p>The ESX is brand new. The Dangote IPO listing on the ESX is among the first major international offerings on this exchange — putting Ethiopia on the African capital markets map.</p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Monitor ESX Announcements</h4><p>ESX is new — watch their official channels for Dangote listing updates and broker appointment announcements.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Open an ESX Broker Account</h4><p>ESX-licensed brokers include Orbit Securities and other newly licensed firms. The market is developing fast.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Subscribe When the Window Opens</h4><p>Ethiopian investors will be able to apply during the same window as other African countries.</p></div></div>
+        </div>
+        <a href="https://nestuge.com/uuowodqkx" class="shine-btn full-width">Get the Full Pan-African IPO Guide — ₦4,500 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRVM -->
+  <div class="country-panel" id="panel-brvm">
+    <div class="panel-hero">
+      <div class="panel-header" style="background:linear-gradient(135deg,#1a237e,#283593);">
+        <h2>🌍 BRVM — 8 West African Countries</h2>
+        <p>The Bourse Régionale des Valeurs Mobilières serves 8 French-speaking West African nations through one shared exchange. The Dangote IPO brings a major Anglophone company to Francophone Africa.</p>
+      </div>
+      <div class="panel-body">
+        <div class="info-grid">
+          <div class="info-box"><div class="info-label">Exchange</div><div class="info-val">BRVM (Abidjan)</div></div>
+          <div class="info-box"><div class="info-label">Currency</div><div class="info-val">CFA Franc (FCFA)</div></div>
+          <div class="info-box"><div class="info-label">Listing Type</div><div class="info-val">Secondary</div></div>
+          <div class="info-box"><div class="info-label">Countries</div><div class="info-val gold">8 nations</div></div>
+          <div class="info-box"><div class="info-label">Regulator</div><div class="info-val">CREPMF</div></div>
+          <div class="info-box"><div class="info-label">Status</div><div class="info-val">Filing in progress</div></div>
+        </div>
+        <div class="hook-box">
+          <div class="hook-icon">🤝</div>
+          <div class="hook-text">
+            <h3>8 Countries, 1 Exchange</h3>
+            <p>Senegal · Côte d'Ivoire · Burkina Faso · Mali · Niger · Togo · Benin · Guinea-Bissau. The BRVM connects over 130 million West Africans to this single IPO opportunity.</p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Open a BRVM-Licensed Broker Account</h4><p>Use any CREPMF-licensed Société de Gestion et d'Intermédiation (SGI). Major SGIs include NSIA Finance, Coris Bourse, and Hudson & Cie.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Get a BRVM Investor Account</h4><p>Your SGI will open a Dépositaire Central / Banque de Règlement (DC/BR) account to hold your shares electronically.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Subscribe in FCFA</h4><p>Pricing will be converted to CFA Franc. Apply through your SGI during the subscription window.</p></div></div>
+        </div>
+        <a href="https://nestuge.com/uuowodqkx" class="shine-btn full-width">Get the Full Pan-African IPO Guide — ₦4,500 →</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:48px;"></div>
+</div>
+
+<footer>
+  <div class="footer-logo"><img src="data:image/png;base64,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" alt="Rise With Stocks" style="height:56px;width:56px;border-radius:50%;display:block;margin:0 auto 10px;box-shadow:0 4px 16px rgba(200,134,10,0.3);"></div>
+  <p>© 2026 King Moses O.A. · Rise With Stocks · Learn. Invest. Grow.<br>
+  <a href="/">Home</a> · <a href="/timeline.html">IPO Timeline</a> · <a href="/brokers.html">Brokers</a> · <a href="https://nestuge.com/uuowodqkx">Get the Playbook</a><br><br>
+  This page is for educational purposes only. Always verify listing details with official exchange and regulatory announcements.</p>
+</footer>
+<script>
+function showCountry(id,btn){
+  document.querySelectorAll('.country-panel').forEach(p=>p.classList.remove('show'));
+  document.querySelectorAll('.country-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('show');
+  btn.classList.add('active');
+  document.getElementById('panel-'+id).scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Mini-Course — Rise With Stocks</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
+:root{--navy:#0B1120;--gold:#C8860A;--gold-bright:#F5A623;--gold-light:#FFD166;--gold-pale:#FFF8E8;--white:#FFFFFF;--off-white:#F8F7F4;--cream:#FDF9F0;--text:#1A1A2E;--text-mid:#444466;--text-light:#888899;--border:#E8E4DA;--green:#16A34A;--green-light:#DCFCE7;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);}
+
+/* ── UNIVERSAL NAV ── */
+.site-nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  gap: 16px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(200,134,10,0.3);
+}
+.nav-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.nav-logo-text span { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+}
+.nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  text-decoration: none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  transition: all 0.15s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav-link:hover { background: var(--off-white); color: var(--navy); }
+.nav-link.active { background: var(--navy); color: var(--gold-light); }
+
+.nav-cta-wrap { flex-shrink: 0; }
+.nav-cta {
+  background: linear-gradient(135deg, #F5A623, #C8860A, #F5A623);
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 13px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(200,134,10,0.3);
+  white-space: nowrap;
+  display: block;
+}
+
+/* ── HAMBURGER ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--white);
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+/* ── MOBILE DRAWER ── */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 300;
+}
+.nav-drawer.open { display: block; }
+.nav-drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11,17,32,0.6);
+  backdrop-filter: blur(2px);
+}
+.nav-drawer-panel {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: min(300px, 85vw);
+  background: var(--white);
+  padding: 0;
+  overflow-y: auto;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+}
+.nav-drawer-header {
+  background: var(--navy);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-drawer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-drawer-logo img { height: 36px; width: 36px; border-radius: 50%; }
+.nav-drawer-logo span {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+}
+.nav-drawer-logo span em { color: var(--gold-light); font-style: normal; }
+.nav-drawer-close {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+.nav-drawer-links { padding: 16px; }
+.nav-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-mid);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  transition: all 0.15s;
+}
+.nav-drawer-link:hover { background: var(--off-white); color: var(--navy); }
+.nav-drawer-link.active { background: var(--navy); color: var(--gold-light); }
+.nav-drawer-link .icon { font-size: 18px; width: 24px; text-align: center; }
+.nav-drawer-divider { height: 1px; background: var(--border); margin: 12px 0; }
+.nav-drawer-cta {
+  display: block;
+  margin: 16px;
+  background: linear-gradient(135deg, #F5A623, #C8860A, #F5A623);
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 800;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(200,134,10,0.35);
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-cta-wrap { display: none; }
+  .nav-hamburger { display: flex; }
+}
+@media (max-width: 400px) {
+  .nav-logo-text { display: none; }
+}
+
+.hero{background:var(--navy);padding:52px 24px 40px;text-align:center;}
+.eyebrow{display:inline-block;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:18px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,6vw,44px);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:12px;}
+.hero h1 em{color:var(--gold-light);font-style:normal;}
+.hero p{color:rgba(255,255,255,.6);font-size:15px;max-width:500px;margin:0 auto 20px;line-height:1.7;}
+.hero-pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+.hero-pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:6px 14px;font-size:12px;color:rgba(255,255,255,.7);}
+.main{max-width:780px;margin:0 auto;padding:32px 24px 60px;}
+
+/* LESSON NAV */
+.lesson-nav{display:flex;gap:6px;margin-bottom:28px;overflow-x:auto;padding-bottom:4px;}
+.lesson-tab{flex-shrink:0;padding:9px 16px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);font-size:13px;font-weight:700;color:var(--text-mid);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;}
+.lesson-tab:hover{border-color:var(--gold);}
+.lesson-tab.active{background:var(--navy);color:var(--gold-light);border-color:var(--navy);}
+.lesson-tab.done{background:var(--green-light);color:var(--green);border-color:var(--green);}
+
+/* PROGRESS */
+.progress-bar-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:24px;display:flex;align-items:center;gap:14px;}
+.progress-bar{flex:1;height:8px;background:var(--border);border-radius:100px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));border-radius:100px;transition:width .4s ease;}
+.progress-text{font-size:13px;font-weight:700;color:var(--text-mid);white-space:nowrap;}
+
+/* LESSON CONTENT */
+.lesson-panel{display:none;}
+.lesson-panel.show{display:block;animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.lesson-card{background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:20px;}
+.lesson-header{padding:28px 28px 20px;}
+.lesson-num{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.lesson-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--navy);line-height:1.2;margin-bottom:10px;}
+.lesson-time{font-size:12px;color:var(--text-light);display:flex;align-items:center;gap:5px;}
+.lesson-divider{height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-bright));margin:0 28px;}
+.lesson-body{padding:28px;}
+.lesson-body p{font-size:15px;color:var(--text-mid);line-height:1.85;margin-bottom:16px;}
+.lesson-body p strong{color:var(--navy);font-weight:700;}
+.lesson-callout{background:var(--gold-pale);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:16px 18px;margin:20px 0;font-size:14px;color:var(--text-mid);line-height:1.7;}
+.lesson-callout strong{color:var(--gold);display:block;margin-bottom:5px;}
+.lesson-key-points{background:var(--off-white);border-radius:12px;padding:20px;margin:20px 0;}
+.lesson-key-points h4{font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;}
+.key-point{display:flex;gap:10px;margin-bottom:10px;font-size:14px;color:var(--text-mid);align-items:flex-start;}
+.key-point::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0;margin-top:1px;}
+.quiz-section{background:var(--navy);border-radius:14px;padding:24px;margin-top:24px;}
+.quiz-section h4{color:var(--gold-light);font-size:15px;font-weight:800;margin-bottom:16px;}
+.quiz-q{font-size:15px;color:var(--white);margin-bottom:14px;line-height:1.6;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.quiz-opt{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:13px 16px;font-size:14px;color:rgba(255,255,255,.85);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;text-align:left;}
+.quiz-opt:hover{border-color:var(--gold);background:rgba(200,134,10,.1);}
+.quiz-opt.correct{background:rgba(22,163,74,.2);border-color:var(--green);color:var(--green);}
+.quiz-opt.wrong{background:rgba(220,38,38,.15);border-color:#EF4444;color:#FCA5A5;}
+.quiz-feedback{font-size:14px;color:rgba(255,255,255,.7);line-height:1.7;display:none;padding:12px 0;}
+.quiz-feedback.show{display:block;}
+
+/* LESSON NAV BUTTONS */
+.lesson-nav-btns{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px;}
+.btn-prev{background:var(--white);border:1.5px solid var(--border);color:var(--text-mid);font-size:14px;font-weight:600;padding:13px 24px;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
+.btn-prev:hover{border-color:var(--gold);color:var(--gold);}
+.btn-next{position:relative;background:linear-gradient(135deg,#F5A623,#C8860A,#F5A623);color:var(--navy);font-size:15px;font-weight:800;padding:14px 32px;border-radius:10px;border:none;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(200,134,10,.35);overflow:hidden;transition:all .2s;}
+.btn-next::before{content:'';position:absolute;top:-50%;left:-75%;width:50%;height:200%;background:linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,.5),rgba(255,255,255,0));transform:skewX(-20deg);animation:shimmer 2.5s infinite;}
+@keyframes shimmer{0%{left:-75%}100%{left:125%}}
+
+/* GRADUATION */
+.graduation{display:none;text-align:center;background:var(--white);border:2px solid var(--gold);border-radius:20px;padding:48px 32px;}
+.graduation.show{display:block;animation:fadeUp .5s ease;}
+.grad-icon{font-size:72px;margin-bottom:20px;}
+.graduation h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--navy);margin-bottom:12px;}
+.graduation p{font-size:15px;color:var(--text-mid);max-width:480px;margin:0 auto 28px;line-height:1.75;}
+.shine-btn{position:relative;background:linear-gradient(135deg,#F5A623,#C8860A,#F5A623);color:var(--navy);font-size:17px;font-weight:900;padding:18px 40px;border-radius:12px;border:none;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 16px rgba(200,134,10,.4);overflow:hidden;text-decoration:none;display:inline-block;margin-bottom:16px;}
+.shine-btn::before{content:'';position:absolute;top:-50%;left:-75%;width:50%;height:200%;background:linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,.45),rgba(255,255,255,0));transform:skewX(-20deg);animation:shimmer 2.5s infinite;}
+.restart-link{display:block;font-size:13px;color:var(--text-light);text-decoration:underline;cursor:pointer;margin-top:8px;}
+footer{background:var(--navy);padding:28px 24px;text-align:center;margin-top:48px;}
+footer p{font-size:11px;color:rgba(255,255,255,.35);line-height:1.8;}
+footer a{color:var(--gold-light);text-decoration:none;}
+.footer-logo{margin-bottom:12px;}
+</style>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+</head>
+<body>
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="data:image/png;base64,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" alt="Rise With Stocks">
+      <span class="nav-logo-text">Rise With <span>Stocks</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="nav-link" data-page="home">🏠 Home</a>
+      <a href="/calculator.html" class="nav-link" data-page="calculator">📊 Calculator</a>
+      <a href="/ips.html" class="nav-link" data-page="ips">📋 IPS Generator</a>
+      <a href="/glossary.html" class="nav-link" data-page="glossary">📖 Glossary</a>
+      <a href="/brokers.html" class="nav-link" data-page="brokers">🏦 Brokers</a>
+    </div>
+    <div class="nav-cta-wrap">
+      <a href="https://nestuge.com/uuowodqkx" class="nav-cta">Get Playbook ₦4,500 →</a>
+    </div>
+    <button class="nav-hamburger" onclick="openDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="nav-drawer-panel">
+    <div class="nav-drawer-header">
+      <a href="/" class="nav-drawer-logo">
+        <img src="data:image/png;base64,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" alt="Rise With Stocks">
+        <span>Rise With <em>Stocks</em></span>
+      </a>
+      <button class="nav-drawer-close" onclick="closeDrawer()">×</button>
+    </div>
+    <div class="nav-drawer-links">
+      <a href="/" class="nav-drawer-link" data-page="home"><span class="icon">🏠</span> Home</a>
+      <a href="/calculator.html" class="nav-drawer-link" data-page="calculator"><span class="icon">📊</span> IPO Calculator</a>
+      <a href="/ips.html" class="nav-drawer-link" data-page="ips"><span class="icon">📋</span> IPS Generator</a>
+      <a href="/glossary.html" class="nav-drawer-link" data-page="glossary"><span class="icon">📖</span> Glossary</a>
+      <a href="/brokers.html" class="nav-drawer-link" data-page="brokers"><span class="icon">🏦</span> Broker Comparison</a>
+      <div class="nav-drawer-divider"></div>
+      <a href="https://nestuge.com/of4u8aqba" class="nav-drawer-link"><span class="icon">🎁</span> Free FAQ Guide</a>
+      <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t" class="nav-drawer-link"><span class="icon">📢</span> WhatsApp Channel</a>
+    </div>
+    <a href="https://nestuge.com/uuowodqkx" class="nav-drawer-cta">Get the Playbook — ₦4,500 →</a>
+  </div>
+</div>
+
+<script>
+// Active page highlighting
+(function(){
+  const path = window.location.pathname;
+  const page = path.includes('calculator')?'calculator':
+               path.includes('ips')?'ips':
+               path.includes('glossary')?'glossary':
+               path.includes('brokers')?'brokers':'home';
+  document.querySelectorAll('[data-page="'+page+'"]').forEach(el=>el.classList.add('active'));
+})();
+
+function openDrawer(){
+  document.getElementById('nav-drawer').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  document.getElementById('nav-drawer').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+</script>
+<section class="hero">
+  <div class="eyebrow">Free Mini-Course</div>
+  <h1>Learn to Invest in<br><em>Nigerian Stocks</em></h1>
+  <p>5 short lessons. Plain English. No jargon. Everything you need to start your investing journey with confidence.</p>
+  <div class="hero-pills">
+    <div class="hero-pill">⏱ 20 minutes total</div>
+    <div class="hero-pill">📖 5 lessons</div>
+    <div class="hero-pill">🎯 Quiz after each lesson</div>
+    <div class="hero-pill">🆓 Completely free</div>
+  </div>
+</section>
+
+<div class="main">
+  <!-- PROGRESS -->
+  <div class="progress-bar-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="progress-text" id="progress-text">0 of 5 complete</div>
+  </div>
+
+  <!-- LESSON TABS -->
+  <div class="lesson-nav">
+    <button class="lesson-tab active" id="tab-1" onclick="goLesson(1)">📈 Lesson 1</button>
+    <button class="lesson-tab" id="tab-2" onclick="goLesson(2)">🏢 Lesson 2</button>
+    <button class="lesson-tab" id="tab-3" onclick="goLesson(3)">💰 Lesson 3</button>
+    <button class="lesson-tab" id="tab-4" onclick="goLesson(4)">⚠️ Lesson 4</button>
+    <button class="lesson-tab" id="tab-5" onclick="goLesson(5)">🚀 Lesson 5</button>
+  </div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson-panel show" id="lesson-1">
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">Lesson 1 of 5</div>
+        <div class="lesson-title">What Is the Stock Market and Why Should You Care?</div>
+        <div class="lesson-time">⏱ 4 minutes · 📖 Read</div>
+      </div>
+      <div class="lesson-divider"></div>
+      <div class="lesson-body">
+        <p>Let me ask you a simple question. When you go to the market and buy a bag of rice — who benefits from that transaction? The seller. The farmer who grew the rice. The distributor. Everyone in the chain benefits except you as a buyer.</p>
+        <p>Now imagine if every time you bought fuel, electricity, food, or phone credit — you also earned a share of the company's profit. That is exactly what the stock market allows you to do.</p>
+        <p>When you buy <strong>shares</strong> in a company, you become a part-owner. A small percentage of that company belongs to you. When the company makes profit, you receive a share of that profit — called a <strong>dividend</strong>. When the company grows and becomes more valuable, your shares are worth more — that is called <strong>capital appreciation</strong>.</p>
+        <div class="lesson-callout">
+          <strong>🌽 The Zobo Analogy</strong>
+          Imagine your friend makes the best zobo drink in your street. She sells it from her house for ₦200 per bottle. Business is booming. She wants to expand but needs ₦500,000 for equipment. She offers you 10% of her business for ₦50,000. You invest. She expands. She's now selling 1,000 bottles a day. Your 10% stake earns you ₦20,000 every month in dividends — while you sleep.
+        </div>
+        <p>The Nigerian Exchange (NGX) is simply a regulated marketplace where ordinary people like you and me can buy and sell ownership stakes in publicly listed companies — from Dangote Cement to MTN Nigeria to Zenith Bank.</p>
+        <p>Every day, billions of naira worth of shares change hands. Most of those transactions are made by everyday Nigerians through their smartphones — using a licensed stockbroker's app, in less time than it takes to make a bank transfer.</p>
+        <div class="lesson-key-points">
+          <h4>Key Takeaways from Lesson 1</h4>
+          <div class="key-point">The stock market lets you own a piece of Nigeria's biggest companies</div>
+          <div class="key-point">You earn income in two ways: dividends (profit share) and capital appreciation (price growth)</div>
+          <div class="key-point">The Nigerian Exchange (NGX) is the main stock market in Nigeria</div>
+          <div class="key-point">You can buy shares from your smartphone through a licensed stockbroker</div>
+          <div class="key-point">You don't need to be rich to start — some stocks accept as little as ₦5,000</div>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <h4>🎯 Quick Quiz — Lesson 1</h4>
+      <div class="quiz-q">If you own 1,000 shares in a company and it pays ₦3.50 dividend per share — how much do you earn?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer(this,false,'lesson1')">₦350</button>
+        <button class="quiz-opt" onclick="answer(this,true,'lesson1')">₦3,500</button>
+        <button class="quiz-opt" onclick="answer(this,false,'lesson1')">₦35,000</button>
+        <button class="quiz-opt" onclick="answer(this,false,'lesson1')">₦350,000</button>
+      </div>
+      <div class="quiz-feedback" id="fb-lesson1">✅ Correct! 1,000 shares × ₦3.50 = ₦3,500. That is your dividend — paid directly to your brokerage account. No work required. This is why dividends are called passive income.</div>
+    </div>
+    <div class="lesson-nav-btns">
+      <div></div>
+      <button class="btn-next" onclick="nextLesson(1)">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson-panel" id="lesson-2">
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">Lesson 2 of 5</div>
+        <div class="lesson-title">How to Open a Brokerage Account in Nigeria</div>
+        <div class="lesson-time">⏱ 4 minutes · 📖 Read</div>
+      </div>
+      <div class="lesson-divider"></div>
+      <div class="lesson-body">
+        <p>Before you can buy a single share on the Nigerian Exchange, you need three things: a <strong>brokerage account</strong>, a <strong>CHN</strong> (Clearing House Number), and a <strong>CSCS account</strong>. Don't be intimidated — you get all three from the same broker, usually on the same day.</p>
+        <p>Think of it this way. A brokerage account is like your trading bank account. The CHN is your unique identity on the NGX — like your BVN for the stock market. The CSCS account is where your actual shares are held electronically — like a share wallet.</p>
+        <div class="lesson-callout">
+          <strong>✅ What You Need to Open an Account</strong>
+          BVN (Bank Verification Number) · NIN (National Identity Number) · Government-issued ID · Passport photograph · Bank account details · Signature
+        </div>
+        <p>The entire process now happens on your phone. Download your chosen broker's app, fill in your details, upload your documents, and your account is ready within 24–48 hours. No office visit required.</p>
+        <p><strong>Which broker should you choose?</strong> For the Dangote Refinery IPO specifically, you must use one of the 4 officially appointed brokers: Zedcrest Securities, Stanbic IBTC, Vetiva Securities, or FirstCap Securities. For general NGX investing, all SEC-licensed brokers work fine.</p>
+        <p>Once your account is open and your wallet is funded, you can buy any NGX-listed stock in seconds. The minimum investment varies by broker — some start as low as ₦5,000.</p>
+        <div class="lesson-key-points">
+          <h4>Key Takeaways from Lesson 2</h4>
+          <div class="key-point">You need: brokerage account + CHN + CSCS account — all from the same broker</div>
+          <div class="key-point">The process is 100% online — no office visit needed</div>
+          <div class="key-point">Documents needed: BVN, NIN, ID, passport photo</div>
+          <div class="key-point">For the Dangote IPO, use one of the 4 appointed brokers</div>
+          <div class="key-point">Your shares are held electronically in your CSCS account — they are yours permanently</div>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <h4>🎯 Quick Quiz — Lesson 2</h4>
+      <div class="quiz-q">What does CSCS stand for and what is it used for?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer(this,false,'lesson2')">Central Savings and Credit System — for bank transfers</button>
+        <button class="quiz-opt" onclick="answer(this,true,'lesson2')">Central Securities Clearing System — for holding shares electronically</button>
+        <button class="quiz-opt" onclick="answer(this,false,'lesson2')">Corporate Stock Clearing Service — for stockbrokers only</button>
+        <button class="quiz-opt" onclick="answer(this,false,'lesson2')">Capital Securities and Cash System — for dividends</button>
+      </div>
+      <div class="quiz-feedback" id="fb-lesson2">✅ Correct! CSCS = Central Securities Clearing System. It holds all your shares electronically. When you buy shares, they appear in your CSCS account. When you sell, they leave. Think of it as a share wallet that the government guarantees.</div>
+    </div>
+    <div class="lesson-nav-btns">
+      <button class="btn-prev" onclick="goLesson(1)">← Previous</button>
+      <button class="btn-next" onclick="nextLesson(2)">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson-panel" id="lesson-3">
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">Lesson 3 of 5</div>
+        <div class="lesson-title">Understanding IPOs — What They Are and Why They Matter</div>
+        <div class="lesson-time">⏱ 4 minutes · 📖 Read</div>
+      </div>
+      <div class="lesson-divider"></div>
+      <div class="lesson-body">
+        <p>An IPO — Initial Public Offering — is the first time a private company sells shares to the general public. It is the moment a company opens its doors to ordinary investors like you and me.</p>
+        <p>Think of MTN Nigeria. Before 2019, only institutional investors and the MTN Group owned MTN Nigeria shares. Then in 2019, they did an IPO on the NGX. Millions of Nigerians could suddenly own a piece of the company that takes airtime money from them every single day. The MTN IPO was massively oversubscribed. Those who got in early did very well.</p>
+        <div class="lesson-callout">
+          <strong>📱 The MTN Nigeria IPO — A Lesson in Numbers</strong>
+          MTN Nigeria listed at ₦90 per share in 2019. By 2024, the shares had traded as high as ₦280. That is a 211% return in 5 years — before adding dividends. An investor who put in ₦100,000 in 2019 had over ₦310,000 by 2024.
+        </div>
+        <p>IPOs are exciting because they offer retail investors early access to a company's growth story. When you subscribe to an IPO at the offer price, you get in before the share is traded openly on the market. If demand is strong, the price rises on listing day and you immediately have a paper profit.</p>
+        <p>But IPOs are not guaranteed wins. The share can also fall on listing day — especially if it was overpriced or if market conditions change. That is why preparation matters. You need to understand the company, the numbers, the risks, and your own investment strategy before committing your money.</p>
+        <p><strong>The Dangote Refinery IPO is different.</strong> It is not a small company hoping to raise awareness. It is a $39 billion business that is already profitable, already supplying most of Nigeria's fuel, and is now opening its shares to ordinary Africans for the first time.</p>
+        <div class="lesson-key-points">
+          <h4>Key Takeaways from Lesson 3</h4>
+          <div class="key-point">An IPO is when a private company sells shares to the public for the first time</div>
+          <div class="key-point">IPO investors get in at the offer price — before market trading begins</div>
+          <div class="key-point">MTN Nigeria 2019 is proof of what a well-timed IPO can return</div>
+          <div class="key-point">IPOs are not risk-free — preparation and research are essential</div>
+          <div class="key-point">The Dangote Refinery IPO is already profitable — not a startup bet</div>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <h4>🎯 Quick Quiz — Lesson 3</h4>
+      <div class="quiz-q">What is the key advantage of subscribing to an IPO compared to buying shares after listing?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer(this,false,'lesson3')">IPOs always guarantee profit so there is no risk</button>
+        <button class="quiz-opt" onclick="answer(this,true,'lesson3')">You get shares at the fixed offer price — before the market sets a higher or lower price</button>
+        <button class="quiz-opt" onclick="answer(this,false,'lesson3')">The government pays your dividend for the first year</button>
+        <button class="quiz-opt" onclick="answer(this,false,'lesson3')">You don't need a brokerage account to apply</button>
+      </div>
+      <div class="quiz-feedback" id="fb-lesson3">✅ Correct! IPO subscribers get in at the fixed offer price determined before trading begins. If the share opens higher on listing day, subscribers immediately have a paper gain. This early-access advantage is why IPOs generate so much excitement.</div>
+    </div>
+    <div class="lesson-nav-btns">
+      <button class="btn-prev" onclick="goLesson(2)">← Previous</button>
+      <button class="btn-next" onclick="nextLesson(3)">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson-panel" id="lesson-4">
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">Lesson 4 of 5</div>
+        <div class="lesson-title">Understanding Investment Risk — and How to Protect Yourself</div>
+        <div class="lesson-time">⏱ 4 minutes · 📖 Read</div>
+      </div>
+      <div class="lesson-divider"></div>
+      <div class="lesson-body">
+        <p>Let me be honest with you. Every investment carries risk. Nobody — not Buffett, not Dangote, not your broker — can guarantee you will make money in the stock market. What separates successful investors from unsuccessful ones is not the absence of risk, but how they manage it.</p>
+        <p>The first rule of investing is one you have probably heard but may not have truly internalised: <strong>never invest money you cannot afford to lose for the investment period.</strong> Your rent money, your children's school fees, your emergency fund — these should never be in the stock market.</p>
+        <div class="lesson-callout">
+          <strong>⚠️ The 8 Risks Every Nigerian Investor Must Know</strong>
+          Market risk (prices fall) · Liquidity risk (can't sell quickly) · Currency risk (naira devaluation) · Regulatory risk (policy changes) · Company risk (business fails) · Concentration risk (too much in one stock) · Timing risk (buying at the top) · Emotional risk (panic selling)
+        </div>
+        <p><strong>Diversification</strong> is your best defence. Don't put everything into one stock. Spread your money across different sectors — banking, consumer goods, energy, infrastructure. That way, if one sector struggles, the others carry you.</p>
+        <p><strong>Time in the market beats timing the market.</strong> Nigerian investors who held blue-chip stocks through the 2008 NGX crash, the 2016 recession, and the COVID dip all recovered — and those who held longest made the most. The market rewards patience.</p>
+        <p>Finally — <strong>never invest based on WhatsApp tips, social media hype, or FOMO.</strong> Read the prospectus. Look at the financials. Understand what you are buying. Your money, your research, your decision.</p>
+        <div class="lesson-key-points">
+          <h4>Key Takeaways from Lesson 4</h4>
+          <div class="key-point">Every investment carries risk — managing it is what matters</div>
+          <div class="key-point">Never invest money you need within the investment period</div>
+          <div class="key-point">Diversify — spread across sectors to reduce risk</div>
+          <div class="key-point">Time in market beats timing the market</div>
+          <div class="key-point">Research before you invest — never follow social media tips blindly</div>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <h4>🎯 Quick Quiz — Lesson 4</h4>
+      <div class="quiz-q">Which of these is the SAFEST approach to managing stock market risk?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer(this,false,'lesson4')">Put all your money in one strong company you believe in</button>
+        <button class="quiz-opt" onclick="answer(this,false,'lesson4')">Sell all shares the moment the price drops by 5%</button>
+        <button class="quiz-opt" onclick="answer(this,true,'lesson4')">Diversify across sectors, only invest money you won't need for the investment period, and hold patiently</button>
+        <button class="quiz-opt" onclick="answer(this,false,'lesson4')">Follow the most popular stocks on social media</button>
+      </div>
+      <div class="quiz-feedback" id="fb-lesson4">✅ Correct! Diversification + patience + only investing surplus money is the foundation of every successful retail investor strategy. It won't make you rich overnight — but it will protect you from losing everything.</div>
+    </div>
+    <div class="lesson-nav-btns">
+      <button class="btn-prev" onclick="goLesson(3)">← Previous</button>
+      <button class="btn-next" onclick="nextLesson(4)">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson-panel" id="lesson-5">
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <div class="lesson-num">Lesson 5 of 5</div>
+        <div class="lesson-title">Your Action Plan — Getting Ready for the Dangote Refinery IPO</div>
+        <div class="lesson-time">⏱ 4 minutes · 📖 Read</div>
+      </div>
+      <div class="lesson-divider"></div>
+      <div class="lesson-body">
+        <p>You have made it to Lesson 5. You now understand the stock market, brokerage accounts, IPOs, and risk. You know more than 90% of Nigerians. Now let's talk about what you actually do with that knowledge.</p>
+        <p>The Dangote Refinery IPO subscription window is expected to open in September 2026. That means you have weeks — not months — to prepare. Here is your step-by-step action plan:</p>
+        <div class="lesson-callout">
+          <strong>📋 Your 5-Step September 2026 Action Plan</strong>
+        </div>
+        <div class="lesson-key-points">
+          <h4>Step 1: Open Your Brokerage Account This Week</h4>
+          <div class="key-point">Download Zedcrest, Stanbic IBTC, Vetiva, or FirstCap app</div>
+          <div class="key-point">Upload BVN, NIN, ID, and passport photo</div>
+          <div class="key-point">Account opens within 1–2 business days</div>
+        </div>
+        <div class="lesson-key-points">
+          <h4>Step 2: Get Your CHN and CSCS Number</h4>
+          <div class="key-point">Your broker assigns these automatically when your account opens</div>
+          <div class="key-point">Save these numbers somewhere safe — you will need them forever</div>
+        </div>
+        <div class="lesson-key-points">
+          <h4>Step 3: Fund Your Brokerage Wallet</h4>
+          <div class="key-point">Transfer your intended IPO investment into your wallet before September</div>
+          <div class="key-point">Your funds must be available BEFORE the window opens</div>
+          <div class="key-point">Apply for more than your minimum — expect proportional allotment</div>
+        </div>
+        <div class="lesson-key-points">
+          <h4>Step 4: Read the Playbook</h4>
+          <div class="key-point">70 pages covering every detail of this IPO</div>
+          <div class="key-point">Includes the private placement story, dollar dividends, risks, and listing day strategy</div>
+          <div class="key-point">Know exactly what you are investing in before you commit</div>
+        </div>
+        <div class="lesson-key-points">
+          <h4>Step 5: Apply Early When the Window Opens</h4>
+          <div class="key-point">Don't wait for the last day — apply as early as possible</div>
+          <div class="key-point">Watch the Rise With Stocks WhatsApp Channel for the official announcement</div>
+          <div class="key-point">Then hold patiently and collect your dividends</div>
+        </div>
+        <p style="margin-top:8px;">You are already ahead of millions of Nigerians who will hear about this IPO too late. The preparation window is closing. Use it.</p>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <h4>🎯 Final Quiz — Lesson 5</h4>
+      <div class="quiz-q">What is the MOST IMPORTANT thing to do before the subscription window opens in September?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" onclick="answer(this,false,'lesson5')">Wait and see if the IPO gets good reviews before investing</button>
+        <button class="quiz-opt" onclick="answer(this,false,'lesson5')">Ask friends on WhatsApp if it is a good investment</button>
+        <button class="quiz-opt" onclick="answer(this,true,'lesson5')">Open your brokerage account, get your CHN and CSCS, and fund your wallet before the window opens</button>
+        <button class="quiz-opt" onclick="answer(this,false,'lesson5')">Apply on the last day of the window to see the final demand</button>
+      </div>
+      <div class="quiz-feedback" id="fb-lesson5">✅ Correct! Your account, CHN, CSCS, and funded wallet must ALL be ready BEFORE the window opens. Many Nigerians miss IPOs because they try to rush this setup during the subscription period. Don't be one of them.</div>
+    </div>
+    <div class="lesson-nav-btns">
+      <button class="btn-prev" onclick="goLesson(4)">← Previous</button>
+      <button class="btn-next" onclick="complete()">Complete Course 🎓</button>
+    </div>
+  </div>
+
+  <!-- GRADUATION -->
+  <div class="graduation" id="graduation">
+    <div class="grad-icon">🎓</div>
+    <h2>Course Complete!</h2>
+    <p>You have finished all 5 lessons and passed every quiz. You now have the foundational knowledge to invest in Nigerian stocks with confidence — starting with the Dangote Refinery IPO.</p>
+    <p style="margin-top:12px;"><strong>The next step is the Dangote Refinery IPO Playbook</strong> — 70 pages of deep-dive preparation covering everything from the private placement story to your exact listing day strategy.</p>
+    <br>
+    <a href="https://nestuge.com/uuowodqkx" class="shine-btn">Get the Full Playbook — ₦4,500 →</a>
+    <span class="restart-link" onclick="restart()">Start the course again</span>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><img src="data:image/png;base64,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" alt="Rise With Stocks" style="height:56px;width:56px;border-radius:50%;display:block;margin:0 auto 10px;box-shadow:0 4px 16px rgba(200,134,10,0.3);"></div>
+  <p>© 2026 King Moses O.A. · Rise With Stocks · Learn. Invest. Grow.<br>
+  <a href="/">Home</a> · <a href="/ips.html">IPS Generator</a> · <a href="/brokers.html">Brokers</a> · <a href="https://nestuge.com/uuowodqkx">Get the Playbook</a></p>
+</footer>
+<script>
+let completed = new Set();
+let quizDone = {};
+const TOTAL = 5;
+
+function goLesson(n){
+  document.querySelectorAll('.lesson-panel').forEach(p=>p.classList.remove('show'));
+  document.getElementById('graduation').classList.remove('show');
+  document.getElementById('lesson-'+n).classList.add('show');
+  document.querySelectorAll('.lesson-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function answer(btn, correct, lessonId){
+  if(quizDone[lessonId]) return;
+  quizDone[lessonId] = true;
+  const opts = btn.parentElement.querySelectorAll('.quiz-opt');
+  opts.forEach(o=>o.disabled=true);
+  btn.classList.add(correct?'correct':'wrong');
+  if(correct) completed.add(lessonId);
+  document.getElementById('fb-'+lessonId).classList.add('show');
+  updateProgress();
+}
+
+function nextLesson(n){
+  if(n < TOTAL){
+    goLesson(n+1);
+    document.getElementById('tab-'+(n+1)).classList.add('active');
+  }
+}
+
+function complete(){
+  document.querySelectorAll('.lesson-panel').forEach(p=>p.classList.remove('show'));
+  document.getElementById('graduation').classList.add('show');
+  completed = new Set(['lesson1','lesson2','lesson3','lesson4','lesson5']);
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProgress(){
+  const pct = Math.round((completed.size/TOTAL)*100);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = completed.size+' of '+TOTAL+' complete';
+  completed.forEach(id=>{
+    const n = id.replace('lesson','');
+    const tab = document.getElementById('tab-'+n);
+    if(tab){tab.classList.remove('active');tab.classList.add('done');}
+  });
+}
+
+function restart(){
+  completed = new Set();
+  quizDone = {};
+  document.querySelectorAll('.quiz-opt').forEach(o=>{o.disabled=false;o.classList.remove('correct','wrong');});
+  document.querySelectorAll('.quiz-feedback').forEach(f=>f.classList.remove('show'));
+  document.querySelectorAll('.lesson-tab').forEach(t=>{t.classList.remove('done','active');});
+  document.getElementById('tab-1').classList.add('active');
+  updateProgress();
+  goLesson(1);
+}
+</script>
+</body>
+</html>
