@@ -5,209 +5,155 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dividend Calendar — Rise With Stocks</title>
 <style>
+
+/* ── UNIVERSAL NAV ── */
+.site-nav{background:var(--white,#fff);border-bottom:1px solid #E8E4DA;padding:0 24px;position:sticky;top:0;z-index:200;box-shadow:0 1px 8px rgba(0,0,0,.06);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:64px;gap:16px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+.nav-logo img{height:40px;width:40px;border-radius:50%;box-shadow:0 2px 8px rgba(200,134,10,.3);}
+.nav-logo-text{font-family:"Playfair Display",serif;font-size:16px;font-weight:700;color:#0B1120;white-space:nowrap;}
+.nav-logo-text span{color:#C8860A;}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1;justify-content:center;}
+.nav-link{font-size:12px;font-weight:600;color:#444466;text-decoration:none;padding:6px 9px;border-radius:8px;transition:all .15s;white-space:nowrap;}
+.nav-link:hover{background:#F8F7F4;color:#0B1120;}
+.nav-link.active{background:#0B1120;color:#FFD166;}
+.nav-cta-wrap{flex-shrink:0;}
+.nav-cta{background:linear-gradient(135deg,#F5A623,#C8860A,#F5A623);color:#0B1120;font-weight:800;font-size:12px;padding:8px 14px;border-radius:8px;text-decoration:none;box-shadow:0 2px 8px rgba(200,134,10,.3);white-space:nowrap;display:block;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border-radius:8px;border:1px solid #E8E4DA;background:#fff;}
+.nav-hamburger span{display:block;width:22px;height:2px;background:#0B1120;border-radius:2px;}
+.nav-drawer{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;}
+.nav-drawer.open{display:block;}
+.nav-drawer-overlay{position:absolute;inset:0;background:rgba(11,17,32,.6);backdrop-filter:blur(2px);}
+.nav-drawer-panel{position:absolute;top:0;left:0;bottom:0;width:min(300px,85vw);background:#fff;overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,.15);}
+.nav-drawer-header{background:#0B1120;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;}
+.nav-drawer-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-drawer-logo img{height:36px;width:36px;border-radius:50%;}
+.nav-drawer-logo span{font-family:"Playfair Display",serif;font-size:15px;font-weight:700;color:#fff;}
+.nav-drawer-logo span em{color:#FFD166;font-style:normal;}
+.nav-drawer-close{background:none;border:none;color:#fff;font-size:24px;cursor:pointer;line-height:1;}
+.nav-drawer-links{padding:14px;}
+.nav-drawer-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;text-decoration:none;color:#444466;font-size:14px;font-weight:600;margin-bottom:3px;transition:all .15s;}
+.nav-drawer-link:hover{background:#F8F7F4;color:#0B1120;}
+.nav-drawer-link.active{background:#0B1120;color:#FFD166;}
+.nav-drawer-link .icon{font-size:17px;width:24px;text-align:center;}
+.nav-drawer-divider{height:1px;background:#E8E4DA;margin:10px 0;}
+.nav-drawer-cta{display:block;margin:14px;background:linear-gradient(135deg,#F5A623,#C8860A,#F5A623);color:#0B1120;font-size:15px;font-weight:800;padding:14px;border-radius:12px;text-align:center;text-decoration:none;box-shadow:0 4px 14px rgba(200,134,10,.35);}
+@media(max-width:900px){.nav-links{display:none;}.nav-cta-wrap{display:none;}.nav-hamburger{display:flex;}}
+@media(max-width:400px){.nav-logo-text{display:none;}}
+
+/* ── HERO — BULLETPROOF ── */
+section.hero {
+  background: #0B1120 !important;
+  padding: 60px 24px 52px !important;
+  text-align: center !important;
+  position: relative;
+  overflow: hidden;
+}
+section.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #C8860A, #F5A623, #C8860A);
+}
+.eyebrow {
+  display: inline-block !important;
+  background: rgba(245,166,35,.15) !important;
+  border: 1px solid rgba(245,166,35,.4) !important;
+  color: #FFD166 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  padding: 6px 16px !important;
+  border-radius: 100px !important;
+  margin-bottom: 24px !important;
+}
+section.hero h1 {
+  font-family: 'Playfair Display', serif !important;
+  font-size: clamp(28px, 6.5vw, 50px) !important;
+  font-weight: 900 !important;
+  color: #FFFFFF !important;
+  line-height: 1.12 !important;
+  margin-bottom: 18px !important;
+  max-width: 680px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  letter-spacing: -0.5px;
+}
+section.hero h1 em {
+  color: #FFD166 !important;
+  font-style: normal !important;
+  position: relative;
+}
+section.hero p {
+  color: rgba(255,255,255,.78) !important;
+  font-size: 16px !important;
+  line-height: 1.75 !important;
+  max-width: 540px !important;
+  margin: 0 auto 28px !important;
+}
+/* Hero stats (Africa page) */
+.hero-stats {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+  margin-top: 28px !important;
+}
+.hero-stat {
+  background: rgba(255,255,255,.07) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  border-radius: 10px !important;
+  padding: 12px 18px !important;
+  text-align: center !important;
+  min-width: 80px !important;
+}
+.hero-stat strong {
+  display: block !important;
+  font-size: 22px !important;
+  font-weight: 900 !important;
+  color: #FFD166 !important;
+  line-height: 1 !important;
+  margin-bottom: 4px !important;
+}
+.hero-stat span {
+  font-size: 10px !important;
+  color: rgba(255,255,255,.5) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .8px !important;
+}
+/* Hero pills (Learn page) */
+.hero-pills {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+  margin-top: 4px !important;
+}
+.hero-pill {
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.15) !important;
+  border-radius: 100px !important;
+  padding: 6px 14px !important;
+  font-size: 12px !important;
+  color: rgba(255,255,255,.75) !important;
+  font-weight: 500 !important;
+}
+
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
 :root{--navy:#0B1120;--gold:#C8860A;--gold-bright:#F5A623;--gold-light:#FFD166;--gold-pale:#FFF8E8;--white:#FFFFFF;--off-white:#F8F7F4;--text:#1A1A2E;--text-mid:#444466;--text-light:#888899;--border:#E8E4DA;--green:#16A34A;--green-light:#DCFCE7;--purple:#7C3AED;--purple-light:#EDE9FE;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);}
 
-/* ── UNIVERSAL NAV ── */
-.site-nav {
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
-  padding: 0 24px;
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
-}
-.nav-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 64px;
-  gap: 16px;
-}
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-.nav-logo img {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(200,134,10,0.3);
-}
-.nav-logo-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--navy);
-  white-space: nowrap;
-}
-.nav-logo-text span { color: var(--gold); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex: 1;
-  justify-content: center;
-}
-.nav-link {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-mid);
-  text-decoration: none;
-  padding: 7px 12px;
-  border-radius: 8px;
-  transition: all 0.15s;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.nav-link:hover { background: var(--off-white); color: var(--navy); }
-.nav-link.active { background: var(--navy); color: var(--gold-light); }
-
-.nav-cta-wrap { flex-shrink: 0; }
-.nav-cta {
-  background: linear-gradient(135deg, #F5A623, #C8860A, #F5A623);
-  color: var(--navy);
-  font-weight: 800;
-  font-size: 13px;
-  padding: 9px 16px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 2px 8px rgba(200,134,10,0.3);
-  white-space: nowrap;
-  display: block;
 }
 
-/* ── HAMBURGER ── */
-.nav-hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--white);
-}
-.nav-hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--navy);
-  border-radius: 2px;
-  transition: all 0.2s;
-}
 
-/* ── MOBILE DRAWER ── */
-.nav-drawer {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 300;
-}
-.nav-drawer.open { display: block; }
-.nav-drawer-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(11,17,32,0.6);
-  backdrop-filter: blur(2px);
-}
-.nav-drawer-panel {
-  position: absolute;
-  top: 0; left: 0; bottom: 0;
-  width: min(300px, 85vw);
-  background: var(--white);
-  padding: 0;
-  overflow-y: auto;
-  box-shadow: 4px 0 24px rgba(0,0,0,0.15);
-}
-.nav-drawer-header {
-  background: var(--navy);
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.nav-drawer-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-.nav-drawer-logo img { height: 36px; width: 36px; border-radius: 50%; }
-.nav-drawer-logo span {
-  font-family: 'Playfair Display', serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--white);
-}
-.nav-drawer-logo span em { color: var(--gold-light); font-style: normal; }
-.nav-drawer-close {
-  background: none;
-  border: none;
-  color: var(--white);
-  font-size: 24px;
-  cursor: pointer;
-  line-height: 1;
-}
-.nav-drawer-links { padding: 16px; }
-.nav-drawer-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 13px 14px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: var(--text-mid);
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 4px;
-  transition: all 0.15s;
-}
-.nav-drawer-link:hover { background: var(--off-white); color: var(--navy); }
-.nav-drawer-link.active { background: var(--navy); color: var(--gold-light); }
-.nav-drawer-link .icon { font-size: 18px; width: 24px; text-align: center; }
-.nav-drawer-divider { height: 1px; background: var(--border); margin: 12px 0; }
-.nav-drawer-cta {
-  display: block;
-  margin: 16px;
-  background: linear-gradient(135deg, #F5A623, #C8860A, #F5A623);
-  color: var(--navy);
-  font-size: 15px;
-  font-weight: 800;
-  padding: 15px;
-  border-radius: 12px;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0 4px 14px rgba(200,134,10,0.35);
-}
 
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-cta-wrap { display: none; }
-  .nav-hamburger { display: flex; }
-}
-@media (max-width: 400px) {
-  .nav-logo-text { display: none; }
-}
 
-.hero{background:var(--navy);padding:52px 24px 40px;text-align:center;}
-.eyebrow{display:inline-block;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:18px;}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,6vw,44px);font-weight:900;color:var(--white);line-height:1.15;margin-bottom:12px;}
-.hero h1 em{color:var(--gold-light);font-style:normal;}
-.hero p{color:rgba(255,255,255,.7);font-size:15px;max-width:500px;margin:0 auto;line-height:1.7;}
+
+
 .main{max-width:900px;margin:32px auto 60px;padding:0 24px;}
 
 /* PORTFOLIO BUILDER */
@@ -291,6 +237,14 @@ footer p{font-size:11px;color:rgba(255,255,255,.35);line-height:1.8;}
 footer a{color:var(--gold-light);text-decoration:none;}
 .footer-logo{margin-bottom:12px;}
 @media(max-width:600px){.stock-input-row{flex-direction:column;}.div-amount-col{min-width:80px;}}
+
+
+
+
+
+
+
+
 </style>
 <link rel="icon" type="image/png" href="data:image/png;base64,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">
 </head>
@@ -303,13 +257,16 @@ footer a{color:var(--gold-light);text-decoration:none;}
       <span class="nav-logo-text">Rise With <span>Stocks</span></span>
     </a>
     <div class="nav-links">
-      <a href="/" class="nav-link" data-page="home">🏠 Home</a>
-      <a href="/calculator.html" class="nav-link" data-page="calculator">📊 Calculator</a>
-      <a href="/ips.html" class="nav-link" data-page="ips">📋 IPS Generator</a>
-      <a href="/glossary.html" class="nav-link" data-page="glossary">📖 Glossary</a>
-      <a href="/brokers.html" class="nav-link" data-page="brokers">🏦 Brokers</a>
-      <a href="/timeline.html" class="nav-link" data-page="timeline">📅 Timeline</a>
-      <a href="/learn.html" class="nav-link" data-page="learn">🎓 Learn</a>
+      <a href="/" class="nav-link">🏠 Home</a>
+      <a href="/calculator.html" class="nav-link">📊 Calculator</a>
+      <a href="/ips.html" class="nav-link">📋 IPS Generator</a>
+      <a href="/glossary.html" class="nav-link">📖 Glossary</a>
+      <a href="/brokers.html" class="nav-link">🏦 Brokers</a>
+      <a href="/timeline.html" class="nav-link">📅 Timeline</a>
+      <a href="/africa.html" class="nav-link">🌍 Pan-African</a>
+      <a href="/dividends.html" class="nav-link active">💰 Dividends</a>
+      <a href="/learn.html" class="nav-link">🎓 Learn</a>
+      
     </div>
     <div class="nav-cta-wrap">
       <a href="https://nestuge.com/uuowodqkx" class="nav-cta">Get Playbook ₦4,500 →</a>
@@ -319,8 +276,6 @@ footer a{color:var(--gold-light);text-decoration:none;}
     </button>
   </div>
 </nav>
-
-<!-- MOBILE DRAWER -->
 <div class="nav-drawer" id="nav-drawer">
   <div class="nav-drawer-overlay" onclick="closeDrawer()"></div>
   <div class="nav-drawer-panel">
@@ -329,51 +284,36 @@ footer a{color:var(--gold-light);text-decoration:none;}
         <img src="data:image/png;base64,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" alt="Rise With Stocks">
         <span>Rise With <em>Stocks</em></span>
       </a>
-      <button class="nav-drawer-close" onclick="closeDrawer()">×</button>
+      <button class="nav-drawer-close" onclick="closeDrawer()">&#215;</button>
     </div>
     <div class="nav-drawer-links">
-      <a href="/" class="nav-drawer-link" data-page="home"><span class="icon">🏠</span> Home</a>
-      <a href="/calculator.html" class="nav-drawer-link" data-page="calculator"><span class="icon">📊</span> IPO Calculator</a>
-      <a href="/ips.html" class="nav-drawer-link" data-page="ips"><span class="icon">📋</span> IPS Generator</a>
-      <a href="/glossary.html" class="nav-drawer-link" data-page="glossary"><span class="icon">📖</span> Glossary</a>
-      <a href="/brokers.html" class="nav-drawer-link" data-page="brokers"><span class="icon">🏦</span> Broker Comparison</a>
-      <a href="/timeline.html" class="nav-drawer-link" data-page="timeline"><span class="icon">📅</span> IPO Timeline</a>
-      <a href="/africa.html" class="nav-drawer-link" data-page="africa"><span class="icon">🌍</span> Pan-African Hub</a>
-      <a href="/dividends.html" class="nav-drawer-link" data-page="dividends"><span class="icon">💰</span> Dividend Calendar</a>
-      <a href="/learn.html" class="nav-drawer-link" data-page="learn"><span class="icon">🎓</span> Free Mini-Course</a>
+      <a href="/" class="nav-drawer-link"><span class="icon">🏠</span>Home</a>
+      <a href="/calculator.html" class="nav-drawer-link"><span class="icon">📊</span>Calculator</a>
+      <a href="/ips.html" class="nav-drawer-link"><span class="icon">📋</span>IPS Generator</a>
+      <a href="/glossary.html" class="nav-drawer-link"><span class="icon">📖</span>Glossary</a>
+      <a href="/brokers.html" class="nav-drawer-link"><span class="icon">🏦</span>Brokers</a>
+      <a href="/timeline.html" class="nav-drawer-link"><span class="icon">📅</span>Timeline</a>
+      <a href="/africa.html" class="nav-drawer-link"><span class="icon">🌍</span>Pan-African</a>
+      <a href="/dividends.html" class="nav-drawer-link active"><span class="icon">💰</span>Dividends</a>
+      <a href="/learn.html" class="nav-drawer-link"><span class="icon">🎓</span>Learn</a>
+      
       <div class="nav-drawer-divider"></div>
-      <a href="https://nestuge.com/of4u8aqba" class="nav-drawer-link"><span class="icon">🎁</span> Free FAQ Guide</a>
-      <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t" class="nav-drawer-link"><span class="icon">📢</span> WhatsApp Channel</a>
+      <a href="https://nestuge.com/of4u8aqba" class="nav-drawer-link"><span class="icon">🎁</span>Free FAQ Guide</a>
+      <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t" class="nav-drawer-link"><span class="icon">📢</span>WhatsApp Channel</a>
     </div>
     <a href="https://nestuge.com/uuowodqkx" class="nav-drawer-cta">Get the Playbook — ₦4,500 →</a>
   </div>
 </div>
-
 <script>
-// Active page highlighting
-(function(){
-  const path = window.location.pathname;
-  const page = path.includes('calculator')?'calculator':
-               path.includes('ips')?'ips':
-               path.includes('glossary')?'glossary':
-               path.includes('brokers')?'brokers':'home';
-  document.querySelectorAll('[data-page="'+page+'"]').forEach(el=>el.classList.add('active'));
-})();
-
-function openDrawer(){
-  document.getElementById('nav-drawer').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeDrawer(){
-  document.getElementById('nav-drawer').classList.remove('open');
-  document.body.style.overflow='';
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+function openDrawer(){document.getElementById("nav-drawer").classList.add("open");document.body.style.overflow="hidden";}
+function closeDrawer(){document.getElementById("nav-drawer").classList.remove("open");document.body.style.overflow="";}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeDrawer();});
 </script>
-<section class="hero">
-  <div class="eyebrow">Free Tool</div>
-  <h1>NGX <em>Dividend Calendar</em></h1>
-  <p>Enter your Nigerian stocks. See exactly when your dividend payments are coming and how much you will earn. Built for Nigerian investors.</p>
+
+<section style="background:#0B1120;padding:56px 24px 44px;text-align:center;">
+  <div style="display:inline-block;background:rgba(245,166,35,.15);border:1.5px solid rgba(245,166,35,.4);color:#FFD166;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 18px;border-radius:100px;margin-bottom:22px;font-family:Inter,sans-serif;">Free Tool &#8212; NGX Dividend Tracker</div>
+  <h1 style="font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,48px);font-weight:900;color:#FFFFFF;line-height:1.12;margin-bottom:16px;">Nigerian Stock<br><em style="color:#FFD166;font-style:normal;">Dividend Calendar</em></h1>
+  <p style="color:rgba(255,255,255,.8);font-size:16px;max-width:540px;margin:0 auto;line-height:1.8;font-family:Inter,sans-serif;">Add your NGX stocks and see exactly when your dividend payments arrive and how much you earn. Built for Nigerian investors.</p>
 </section>
 <div class="main">
 
