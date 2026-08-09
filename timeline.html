@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dangote IPO Timeline — Rise With Stocks</title>
 <style>
-
 /* ── UNIVERSAL NAV ── */
 .site-nav{background:var(--white,#fff);border-bottom:1px solid #E8E4DA;padding:0 24px;position:sticky;top:0;z-index:200;box-shadow:0 1px 8px rgba(0,0,0,.06);}
 .nav-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:64px;gap:16px;}
@@ -14,11 +13,11 @@
 .nav-logo-text{font-family:"Playfair Display",serif;font-size:16px;font-weight:700;color:#0B1120;white-space:nowrap;}
 .nav-logo-text span{color:#C8860A;}
 .nav-links{display:flex;align-items:center;gap:2px;flex:1;justify-content:center;}
-.nav-link{font-size:12px;font-weight:600;color:#444466;text-decoration:none;padding:6px 9px;border-radius:8px;transition:all .15s;white-space:nowrap;}
+.nav-link{font-size:11.5px;font-weight:600;color:#444466;text-decoration:none;padding:6px 8px;border-radius:8px;transition:all .15s;white-space:nowrap;}
 .nav-link:hover{background:#F8F7F4;color:#0B1120;}
 .nav-link.active{background:#0B1120;color:#FFD166;}
 .nav-cta-wrap{flex-shrink:0;}
-.nav-cta{background:linear-gradient(135deg,#F5A623,#C8860A,#F5A623);color:#0B1120;font-weight:800;font-size:12px;padding:8px 14px;border-radius:8px;text-decoration:none;box-shadow:0 2px 8px rgba(200,134,10,.3);white-space:nowrap;display:block;}
+.nav-cta{background:linear-gradient(135deg,#F5A623,#C8860A,#F5A623);color:#0B1120;font-weight:800;font-size:11.5px;padding:8px 14px;border-radius:8px;text-decoration:none;box-shadow:0 2px 8px rgba(200,134,10,.3);white-space:nowrap;display:block;}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border-radius:8px;border:1px solid #E8E4DA;background:#fff;}
 .nav-hamburger span{display:block;width:22px;height:2px;background:#0B1120;border-radius:2px;}
 .nav-drawer{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;}
@@ -238,7 +237,8 @@ footer a{color:var(--gold-light);text-decoration:none;}
     </a>
     <div class="nav-links">
       <a href="/" class="nav-link">🏠 Home</a>
-      <a href="/calculator.html" class="nav-link">📊 Calculator</a>
+      <a href="/calculator.html" class="nav-link">📊 IPO Calculator</a>
+      <a href="/tools.html" class="nav-link">🛠️ Free Tools</a>
       <a href="/ips.html" class="nav-link">📋 IPS Generator</a>
       <a href="/glossary.html" class="nav-link">📖 Glossary</a>
       <a href="/brokers.html" class="nav-link">🏦 Brokers</a>
@@ -268,7 +268,8 @@ footer a{color:var(--gold-light);text-decoration:none;}
     </div>
     <div class="nav-drawer-links">
       <a href="/" class="nav-drawer-link"><span class="icon">🏠</span>Home</a>
-      <a href="/calculator.html" class="nav-drawer-link"><span class="icon">📊</span>Calculator</a>
+      <a href="/calculator.html" class="nav-drawer-link"><span class="icon">📊</span>IPO Calculator</a>
+      <a href="/tools.html" class="nav-drawer-link"><span class="icon">🛠️</span>Free Tools</a>
       <a href="/ips.html" class="nav-drawer-link"><span class="icon">📋</span>IPS Generator</a>
       <a href="/glossary.html" class="nav-drawer-link"><span class="icon">📖</span>Glossary</a>
       <a href="/brokers.html" class="nav-drawer-link"><span class="icon">🏦</span>Brokers</a>
@@ -279,7 +280,7 @@ footer a{color:var(--gold-light);text-decoration:none;}
       
       <div class="nav-drawer-divider"></div>
       <a href="https://nestuge.com/of4u8aqba" class="nav-drawer-link"><span class="icon">🎁</span>Free FAQ Guide</a>
-      <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t" class="nav-drawer-link"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" style="display:block;"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path fill="#25D366" d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.773.461 3.476 1.34 4.968L2 22l5.173-1.316A9.955 9.955 0 0012.004 22C17.523 22 22 17.523 22 12.004 22 6.477 17.523 2 12.004 2zm0 18.214a8.21 8.21 0 01-4.188-1.148l-.3-.179-3.07.781.81-2.99-.196-.307a8.197 8.197 0 01-1.27-4.367c0-4.536 3.692-8.228 8.228-8.228 4.536 0 8.208 3.682 8.208 8.218 0 4.536-3.672 8.22-8.222 8.22z"/></svg></span>WhatsApp Channel</a>
+      <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t" class="nav-drawer-link"><span class="icon" style="display:flex;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" style="display:block;"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path fill="#25D366" d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.773.461 3.476 1.34 4.968L2 22l5.173-1.316A9.955 9.955 0 0012.004 22C17.523 22 22 17.523 22 12.004 22 6.477 17.523 2 12.004 2zm0 18.214a8.21 8.21 0 01-4.188-1.148l-.3-.179-3.07.781.81-2.99-.196-.307a8.197 8.197 0 01-1.27-4.367c0-4.536 3.692-8.228 8.228-8.228 4.536 0 8.208 3.682 8.208 8.218 0 4.536-3.672 8.22-8.222 8.22z"/></svg></span>WhatsApp Channel</a>
     </div>
     <a href="https://nestuge.com/uuowodqkx" class="nav-drawer-cta">Get the Playbook — ₦4,500 →</a>
   </div>
