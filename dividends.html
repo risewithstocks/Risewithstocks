@@ -21,40 +21,199 @@
   <meta name="twitter:description" content="Track dividend payments for all major NGX stocks. Add your shares and see exactly when your dividend arrives and how much you earn. Free Nigerian dividend calendar 2026.">
 
 <style>
+
 /* ── UNIVERSAL NAV ── */
-.site-nav{background:var(--white,#fff);border-bottom:1px solid #E8E4DA;padding:0 24px;position:sticky;top:0;z-index:200;box-shadow:0 1px 8px rgba(0,0,0,.06);}
-.nav-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:64px;gap:16px;}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
-.nav-logo img{height:40px;width:40px;border-radius:50%;box-shadow:0 2px 8px rgba(200,134,10,.3);}
-.nav-logo-text{font-family:"Playfair Display",serif;font-size:16px;font-weight:700;color:#0B1120;white-space:nowrap;}
-.nav-logo-text span{color:#C8860A;}
-.nav-links{display:flex;align-items:center;gap:2px;flex:1;justify-content:center;}
-.nav-link{font-size:11.5px;font-weight:600;color:#444466;text-decoration:none;padding:6px 8px;border-radius:8px;transition:all .15s;white-space:nowrap;}
-.nav-link:hover{background:#F8F7F4;color:#0B1120;}
-.nav-link.active{background:#0B1120;color:#FFD166;}
-.nav-cta-wrap{flex-shrink:0;}
-.nav-cta{background:linear-gradient(135deg,#F5A623,#C8860A,#F5A623);color:#0B1120;font-weight:800;font-size:11.5px;padding:8px 14px;border-radius:8px;text-decoration:none;box-shadow:0 2px 8px rgba(200,134,10,.3);white-space:nowrap;display:block;}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border-radius:8px;border:1px solid #E8E4DA;background:#fff;}
-.nav-hamburger span{display:block;width:22px;height:2px;background:#0B1120;border-radius:2px;}
-.nav-drawer{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;}
-.nav-drawer.open{display:block;}
-.nav-drawer-overlay{position:absolute;inset:0;background:rgba(11,17,32,.6);backdrop-filter:blur(2px);}
-.nav-drawer-panel{position:absolute;top:0;left:0;bottom:0;width:min(300px,85vw);background:#fff;overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,.15);}
-.nav-drawer-header{background:#0B1120;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;}
-.nav-drawer-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-drawer-logo img{height:36px;width:36px;border-radius:50%;}
-.nav-drawer-logo span{font-family:"Playfair Display",serif;font-size:15px;font-weight:700;color:#fff;}
-.nav-drawer-logo span em{color:#FFD166;font-style:normal;}
-.nav-drawer-close{background:none;border:none;color:#fff;font-size:24px;cursor:pointer;line-height:1;}
-.nav-drawer-links{padding:14px;}
-.nav-drawer-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;text-decoration:none;color:#444466;font-size:14px;font-weight:600;margin-bottom:3px;transition:all .15s;}
-.nav-drawer-link:hover{background:#F8F7F4;color:#0B1120;}
-.nav-drawer-link.active{background:#0B1120;color:#FFD166;}
-.nav-drawer-link .icon{font-size:17px;width:24px;text-align:center;}
-.nav-drawer-divider{height:1px;background:#E8E4DA;margin:10px 0;}
-.nav-drawer-cta{display:block;margin:14px;background:linear-gradient(135deg,#F5A623,#C8860A,#F5A623);color:#0B1120;font-size:15px;font-weight:800;padding:14px;border-radius:12px;text-align:center;text-decoration:none;box-shadow:0 4px 14px rgba(200,134,10,.35);}
-@media(max-width:900px){.nav-links{display:none;}.nav-cta-wrap{display:none;}.nav-hamburger{display:flex;}}
-@media(max-width:400px){.nav-logo-text{display:none;}}
+.site-nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  gap: 16px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(200,134,10,0.3);
+}
+.nav-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.nav-logo-text span { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+}
+.nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  text-decoration: none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  transition: all 0.15s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav-link:hover { background: var(--off-white); color: var(--navy); }
+.nav-link.active { background: var(--navy); color: var(--gold-light); }
+
+.nav-cta-wrap { flex-shrink: 0; }
+.nav-cta {
+  background: linear-gradient(135deg, #F5A623, #C8860A, #F5A623);
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 13px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(200,134,10,0.3);
+  white-space: nowrap;
+  display: block;
+}
+
+/* ── HAMBURGER ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--white);
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+/* ── MOBILE DRAWER ── */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 300;
+}
+.nav-drawer.open { display: block; }
+.nav-drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11,17,32,0.6);
+  backdrop-filter: blur(2px);
+}
+.nav-drawer-panel {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: min(300px, 85vw);
+  background: var(--white);
+  padding: 0;
+  overflow-y: auto;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+}
+.nav-drawer-header {
+  background: var(--navy);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-drawer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-drawer-logo img { height: 36px; width: 36px; border-radius: 50%; }
+.nav-drawer-logo span {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+}
+.nav-drawer-logo span em { color: var(--gold-light); font-style: normal; }
+.nav-drawer-close {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+.nav-drawer-links { padding: 16px; }
+.nav-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-mid);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  transition: all 0.15s;
+}
+.nav-drawer-link:hover { background: var(--off-white); color: var(--navy); }
+.nav-drawer-link.active { background: var(--navy); color: var(--gold-light); }
+.nav-drawer-link .icon { font-size: 18px; width: 24px; text-align: center; }
+.nav-drawer-divider { height: 1px; background: var(--border); margin: 12px 0; }
+.nav-drawer-cta {
+  display: block;
+  margin: 16px;
+  background: linear-gradient(135deg, #F5A623, #C8860A, #F5A623);
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 800;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(200,134,10,0.35);
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-cta-wrap { display: none; }
+  .nav-hamburger { display: flex; }
+}
+@media (max-width: 400px) {
+  .nav-logo-text { display: none; }
+}
 
 /* ── HERO — BULLETPROOF ── */
 section.hero {
@@ -282,10 +441,12 @@ footer a{color:var(--gold-light);text-decoration:none;}
       <a href="/africa.html" class="nav-link">🌍 Pan-African</a>
       <a href="/dividends.html" class="nav-link active">💰 Dividends</a>
       <a href="/learn.html" class="nav-link">🎓 Learn</a>
+      <a href="/about.html" class="nav-link">👤 About</a>
+      <a href="/contact.html" class="nav-link">✉️ Contact</a>
       
     </div>
     <div class="nav-cta-wrap">
-      <a href="https://nestuge.com/uuowodqkx" class="nav-cta">Get Playbook ₦4,500 →</a>
+      <a href="https://nestuge.com/uuowodqkx" class="nav-cta">Get Playbook &#8358;4,500 &#8594;</a>
     </div>
     <button class="nav-hamburger" onclick="openDrawer()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -313,12 +474,14 @@ footer a{color:var(--gold-light);text-decoration:none;}
       <a href="/africa.html" class="nav-drawer-link"><span class="icon">🌍</span>Pan-African</a>
       <a href="/dividends.html" class="nav-drawer-link active"><span class="icon">💰</span>Dividends</a>
       <a href="/learn.html" class="nav-drawer-link"><span class="icon">🎓</span>Learn</a>
+      <a href="/about.html" class="nav-drawer-link"><span class="icon">👤</span>About</a>
+      <a href="/contact.html" class="nav-drawer-link"><span class="icon">✉️</span>Contact</a>
       
       <div class="nav-drawer-divider"></div>
-      <a href="https://nestuge.com/of4u8aqba" class="nav-drawer-link"><span class="icon">🎁</span>Free FAQ Guide</a>
-      <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t" class="nav-drawer-link"><span class="icon" style="display:flex;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" style="display:block;"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path fill="#25D366" d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.773.461 3.476 1.34 4.968L2 22l5.173-1.316A9.955 9.955 0 0012.004 22C17.523 22 22 17.523 22 12.004 22 6.477 17.523 2 12.004 2zm0 18.214a8.21 8.21 0 01-4.188-1.148l-.3-.179-3.07.781.81-2.99-.196-.307a8.197 8.197 0 01-1.27-4.367c0-4.536 3.692-8.228 8.228-8.228 4.536 0 8.208 3.682 8.208 8.218 0 4.536-3.672 8.22-8.222 8.22z"/></svg></span>WhatsApp Channel</a>
+      <a href="https://nestuge.com/of4u8aqba" class="nav-drawer-link"><span class="icon">&#127873;</span>Free FAQ Guide</a>
+      <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t" class="nav-drawer-link"><span class="icon" style="display:flex;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="19" height="19" style="display:block;"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path fill="#25D366" d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.773.461 3.476 1.34 4.968L2 22l5.173-1.316A9.955 9.955 0 0012.004 22C17.523 22 22 17.523 22 12.004 22 6.477 17.523 2 12.004 2zm0 18.214a8.21 8.21 0 01-4.188-1.148l-.3-.179-3.07.781.81-2.99-.196-.307a8.197 8.197 0 01-1.27-4.367c0-4.536 3.692-8.228 8.228-8.228 4.536 0 8.208 3.682 8.208 3.218 0 4.536-3.672 8.22-8.222 8.22z"/></svg></span>WhatsApp Channel</a>
     </div>
-    <a href="https://nestuge.com/uuowodqkx" class="nav-drawer-cta">Get the Playbook — ₦4,500 →</a>
+    <a href="https://nestuge.com/uuowodqkx" class="nav-drawer-cta">Get the Playbook &#8212; &#8358;4,500 &#8594;</a>
   </div>
 </div>
 <script>
