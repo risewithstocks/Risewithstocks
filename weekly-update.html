@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Market Update | Rise With Stocks — Dangote IPO Insights</title>
+  <meta name="description" content="Weekly investment insights from King Moses O.A. — FGN Bonds, Corporate Bonds, Geregu Power, and what every Nigerian investor must know before investing.">
+  <meta name="keywords" content="FGN bonds Nigeria, corporate bonds Nigeria, Geregu Power bond, Nigerian investment insights, Dangote IPO weekly update, Rise With Stocks">
+  <link rel="canonical" href="https://risewithstocks.com/weekly-update.html">
+  <meta property="og:title" content="Weekly Market Update — Rise With Stocks">
+  <meta property="og:description" content="FGN Bonds vs Corporate Bonds vs Commercial Papers — what every Nigerian investor must know.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://risewithstocks.com/weekly-update.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0B1120;
+      --navy-mid: #0D1829;
+      --gold: #C8860A;
+      --gold-light: #F5A623;
+      --white: #FFFFFF;
+      --off-white: #F8F7F4;
+      --cream: #FDF9F0;
+      --text: #1A1A2E;
+      --text-mid: #444466;
+      --text-light: #777799;
+      --border: #E8E4DA;
+      --green: #16A34A;
+      --red: #DC2626;
+      --amber: #D97706;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--off-white); color: var(--text); }
+
+    /* ── NAV ── */
+    .site-nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 24px; position: sticky; top: 0; z-index: 200; box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 64px; gap: 16px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 40px; width: 40px; border-radius: 50%; box-shadow: 0 2px 8px rgba(200,134,10,0.3); }
+    .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 4px; flex: 1; justify-content: center; }
+    .nav-link { font-size: 13px; font-weight: 600; color: var(--text-mid); text-decoration: none; padding: 7px 12px; border-radius: 8px; transition: all 0.15s; white-space: nowrap; }
+    .nav-link:hover { background: var(--off-white); color: var(--navy); }
+    .nav-link.active { background: var(--navy); color: var(--gold-light); }
+    .nav-cta { background: linear-gradient(135deg, #F5A623, #C8860A, #F5A623); color: var(--navy); font-weight: 800; font-size: 13px; padding: 9px 16px; border-radius: 8px; text-decoration: none; white-space: nowrap; display: block; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; border-radius: 8px; border: 1px solid var(--border); background: var(--white); }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+    @media(max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-logo-text { font-size: 14px; }
+    }
+    @media(max-width: 400px) { .nav-logo-text { display: none; } }
+
+    /* ── MOBILE DRAWER ── */
+    .nav-drawer { position: fixed; inset: 0; z-index: 300; pointer-events: none; }
+    .nav-drawer.open { pointer-events: all; }
+    .nav-drawer-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.25s; }
+    .nav-drawer.open .nav-drawer-overlay { opacity: 1; }
+    .nav-drawer-panel { position: absolute; top: 0; right: -320px; width: 300px; height: 100%; background: var(--white); box-shadow: -4px 0 24px rgba(0,0,0,0.15); transition: right 0.25s; display: flex; flex-direction: column; }
+    .nav-drawer.open .nav-drawer-panel { right: 0; }
+    .nav-drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 20px 16px; border-bottom: 1px solid var(--border); }
+    .nav-drawer-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--navy); }
+    .nav-drawer-logo em { color: var(--gold); font-style: normal; }
+    .nav-drawer-close { font-size: 24px; background: none; border: none; cursor: pointer; color: var(--text-mid); line-height: 1; }
+    .nav-drawer-links { flex: 1; overflow-y: auto; padding: 12px 0; }
+    .nav-drawer-link { display: flex; align-items: center; gap: 12px; padding: 12px 20px; font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; transition: background 0.15s; }
+    .nav-drawer-link:hover { background: var(--off-white); }
+    .nav-drawer-divider { height: 1px; background: var(--border); margin: 8px 20px; }
+    .nav-drawer-cta { margin: 16px; padding: 14px; background: linear-gradient(135deg, #F5A623, #C8860A); color: var(--navy); font-weight: 800; font-size: 15px; border-radius: 10px; text-decoration: none; text-align: center; display: block; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #162040 100%);
+      padding: 56px 24px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    }
+    .hero-inner { max-width: 800px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,134,10,0.15);
+      border: 1px solid rgba(200,134,10,0.3);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-light); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 44px);
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .page-hero h1 span { color: var(--gold-light); }
+    .hero-sub { font-size: 16px; color: rgba(255,255,255,0.7); max-width: 600px; line-height: 1.6; margin-bottom: 24px; }
+    .hero-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .hero-author { display: flex; align-items: center; gap: 10px; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-light)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; color: var(--navy); flex-shrink: 0; }
+    .author-info { display: flex; flex-direction: column; }
+    .author-name { font-size: 14px; font-weight: 700; color: var(--white); }
+    .author-title { font-size: 12px; color: rgba(255,255,255,0.55); }
+    .hero-date { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+    /* ── LAYOUT ── */
+    .page-body { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: 1fr 320px; gap: 40px; }
+    @media(max-width: 900px) { .page-body { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+    /* ── ARTICLE ── */
+    .article-card { background: var(--white); border-radius: 16px; padding: 40px; border: 1px solid var(--border); }
+    .article-lead {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.7;
+      border-left: 4px solid var(--gold);
+      padding-left: 20px;
+      margin-bottom: 32px;
+    }
+    .article-body p {
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .article-body strong { color: var(--navy); }
+
+    /* ── INSTRUMENT CARDS ── */
+    .instrument-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+    @media(max-width: 600px) { .instrument-grid { grid-template-columns: 1fr; } }
+    .instrument-card {
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .instrument-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+    }
+    .instrument-card.gov::before { background: var(--green); }
+    .instrument-card.gov { background: #f0fdf4; border-color: #bbf7d0; }
+    .instrument-card.savings::before { background: #3b82f6; }
+    .instrument-card.savings { background: #eff6ff; border-color: #bfdbfe; }
+    .instrument-card.corp::before { background: var(--amber); }
+    .instrument-card.corp { background: #fffbeb; border-color: #fde68a; }
+    .instrument-card.paper::before { background: var(--red); }
+    .instrument-card.paper { background: #fef2f2; border-color: #fecaca; }
+    .instrument-num { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+    .instrument-card.gov .instrument-num { color: var(--green); }
+    .instrument-card.savings .instrument-num { color: #3b82f6; }
+    .instrument-card.corp .instrument-num { color: var(--amber); }
+    .instrument-card.paper .instrument-num { color: var(--red); }
+    .instrument-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .instrument-body { font-size: 13.5px; line-height: 1.7; color: var(--text-mid); }
+    .instrument-tag {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .instrument-card.gov .instrument-tag { background: #dcfce7; color: #166534; }
+    .instrument-card.savings .instrument-tag { background: #dbeafe; color: #1e40af; }
+    .instrument-card.corp .instrument-tag { background: #fef3c7; color: #92400e; }
+    .instrument-card.paper .instrument-tag { background: #fee2e2; color: #991b1b; }
+
+    /* ── WARNING BOX ── */
+    .warning-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid var(--amber);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+    .warning-box .wb-title { font-size: 13px; font-weight: 800; color: var(--amber); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .warning-box ul { list-style: none; padding: 0; }
+    .warning-box ul li { font-size: 14px; line-height: 1.7; color: var(--text); padding: 4px 0; padding-left: 20px; position: relative; }
+    .warning-box ul li::before { content: '✋'; position: absolute; left: 0; font-size: 13px; }
+
+    /* ── QUESTION BOX ── */
+    .question-box {
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 28px 0;
+    }
+    .question-box .qb-title { font-size: 13px; font-weight: 800; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+    .question-box ul { list-style: none; padding: 0; }
+    .question-box ul li { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.85); padding: 5px 0; padding-left: 24px; position: relative; }
+    .question-box ul li::before { content: '→'; position: absolute; left: 0; color: var(--gold-light); font-weight: 700; }
+
+    /* ── IPS CTA ── */
+    .ips-cta {
+      background: linear-gradient(135deg, var(--navy) 0%, #162040 100%);
+      border-radius: 14px;
+      padding: 28px;
+      margin: 32px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ips-cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); }
+    .ips-cta h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--white); margin-bottom: 8px; }
+    .ips-cta p { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 20px; line-height: 1.6; }
+    .ips-cta a { display: inline-block; background: linear-gradient(135deg, #F5A623, #C8860A); color: var(--navy); font-weight: 800; font-size: 14px; padding: 12px 28px; border-radius: 8px; text-decoration: none; }
+
+    /* ── AUTHOR SIGN-OFF ── */
+    .author-signoff { display: flex; align-items: center; gap: 16px; padding-top: 28px; margin-top: 28px; border-top: 1px solid var(--border); }
+    .signoff-avatar { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-light)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; color: var(--navy); flex-shrink: 0; }
+    .signoff-info .name { font-size: 15px; font-weight: 700; color: var(--navy); }
+    .signoff-info .role { font-size: 13px; color: var(--text-light); }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: var(--white); border-radius: 14px; padding: 24px; border: 1px solid var(--border); }
+    .sidebar-card h3 { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--navy); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--gold); }
+    .sidebar-link { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text); font-size: 13.5px; font-weight: 500; transition: color 0.15s; }
+    .sidebar-link:last-child { border-bottom: none; }
+    .sidebar-link:hover { color: var(--gold); }
+    .sidebar-link .icon { font-size: 18px; flex-shrink: 0; }
+    .sidebar-playbook { background: linear-gradient(135deg, var(--navy), #162040); border-radius: 14px; padding: 24px; text-align: center; }
+    .sidebar-playbook h3 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--white); margin-bottom: 8px; }
+    .sidebar-playbook p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 16px; line-height: 1.6; }
+    .sidebar-playbook a { display: block; background: linear-gradient(135deg, #F5A623, #C8860A); color: var(--navy); font-weight: 800; font-size: 14px; padding: 12px; border-radius: 8px; text-decoration: none; }
+    .wa-card { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 14px; padding: 24px; text-align: center; }
+    .wa-card h3 { font-size: 15px; font-weight: 700; color: #166534; margin-bottom: 8px; }
+    .wa-card p { font-size: 13px; color: #166534; margin-bottom: 14px; opacity: 0.8; }
+    .wa-card a { display: flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: white; font-weight: 700; font-size: 14px; padding: 12px; border-radius: 8px; text-decoration: none; }
+
+    /* ── ARCHIVE ── */
+    .archive-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .archive-item:last-child { border-bottom: none; }
+    .archive-tag { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 4px; }
+    .archive-title { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.4; }
+    .archive-date { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy); padding: 40px 24px; text-align: center; }
+    footer p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.8; }
+    footer a { color: var(--gold-light); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="data:image/png;base64,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" alt="Rise With Stocks">
+      <span class="nav-logo-text">Rise With <span>Stocks</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">🏠 Home</a>
+      <a href="/calculator.html" class="nav-link">📊 Calculator</a>
+      <a href="/tools.html" class="nav-link">🛠️ Free Tools</a>
+      <a href="/brokers.html" class="nav-link">🏦 Brokers</a>
+      <a href="/weekly-update.html" class="nav-link active">📰 Weekly Update</a>
+      <a href="/learn.html" class="nav-link">🎓 Learn</a>
+      <a href="/about.html" class="nav-link">👤 About</a>
+    </div>
+    <div class="nav-cta-wrap">
+      <a href="https://nestuge.com/uuowodqkx" class="nav-cta">Get Playbook ₦4,500 →</a>
+    </div>
+    <button class="nav-hamburger" onclick="openDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="nav-drawer-panel">
+    <div class="nav-drawer-header">
+      <span class="nav-drawer-logo">Rise With <em>Stocks</em></span>
+      <button class="nav-drawer-close" onclick="closeDrawer()">×</button>
+    </div>
+    <div class="nav-drawer-links">
+      <a href="/" class="nav-drawer-link">🏠 Home</a>
+      <a href="/calculator.html" class="nav-drawer-link">📊 IPO Calculator</a>
+      <a href="/tools.html" class="nav-drawer-link">🛠️ Free Tools</a>
+      <a href="/brokers.html" class="nav-drawer-link">🏦 Brokers</a>
+      <a href="/weekly-update.html" class="nav-drawer-link">📰 Weekly Update</a>
+      <a href="/glossary.html" class="nav-drawer-link">📖 Glossary</a>
+      <a href="/timeline.html" class="nav-drawer-link">📅 IPO Timeline</a>
+      <a href="/learn.html" class="nav-drawer-link">🎓 Learn</a>
+      <a href="/about.html" class="nav-drawer-link">👤 About</a>
+      <a href="/contact.html" class="nav-drawer-link">📞 Contact</a>
+      <div class="nav-drawer-divider"></div>
+      <a href="https://nestuge.com/of4u8aqba" class="nav-drawer-link">🎁 Free FAQ Guide</a>
+      <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t" class="nav-drawer-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path fill="#25D366" d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.773.461 3.476 1.34 4.968L2 22l5.173-1.316A9.955 9.955 0 0012.004 22C17.523 22 22 17.523 22 12.004 22 6.477 17.523 2 12.004 2zm0 18.214a8.21 8.21 0 01-4.188-1.148l-.3-.179-3.07.781.81-2.99-.196-.307a8.197 8.197 0 01-1.27-4.367c0-4.536 3.692-8.228 8.228-8.228 4.536 0 8.208 3.682 8.208 8.218 0 4.536-3.672 8.22-8.222 8.22z"/></svg>
+        WhatsApp Channel
+      </a>
+    </div>
+    <a href="https://nestuge.com/uuowodqkx" class="nav-drawer-cta">Get the Playbook — ₦4,500 →</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="dot"></div>
+      Weekly Market Update · August 2026
+    </div>
+    <h1>Geregu Power, Bonds &<br><span>What Many Investors Don't Know</span></h1>
+    <p class="hero-sub">FGN Bonds, FGN Savings Bonds, Corporate Bonds, and Commercial Papers are not the same thing. Here's what every investor needs to understand before putting money in.</p>
+    <div class="hero-meta">
+      <div class="hero-author">
+        <div class="author-avatar">KM</div>
+        <div class="author-info">
+          <span class="author-name">King Moses O.A.</span>
+          <span class="author-title">ACIB · Rise With Stocks</span>
+        </div>
+      </div>
+      <span class="hero-date">📅 August 11, 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="page-body">
+
+  <!-- ARTICLE -->
+  <main>
+    <article class="article-card">
+
+      <p class="article-lead">
+        By now, many of you have seen the news around Geregu Power Plc and its ₦40 billion corporate bond obligation — which it has failed to repay investors. This is a good opportunity to talk about something I notice many investors confuse.
+      </p>
+
+      <div class="article-body">
+
+        <p>FGN Bonds, FGN Savings Bonds, Corporate Bonds, and Commercial Papers are <strong>not the same thing.</strong> Let me break it down simply.</p>
+
+        <div class="instrument-grid">
+
+          <div class="instrument-card gov">
+            <div class="instrument-num">01 — Government</div>
+            <div class="instrument-name">FGN Bonds</div>
+            <div class="instrument-body">You are essentially lending money to the Federal Government. The government pays you interest according to the terms and returns your principal at maturity. The regular FGN Bond auction has a minimum subscription of <strong>₦50,001,000</strong> — so this is not designed for someone starting with ₦5,000.</div>
+            <span class="instrument-tag">Lowest Risk</span>
+          </div>
+
+          <div class="instrument-card savings">
+            <div class="instrument-num">02 — Government</div>
+            <div class="instrument-name">FGN Savings Bonds</div>
+            <div class="instrument-body">Much more accessible to ordinary investors. You can participate with as little as <strong>₦5,000</strong>, in multiples of ₦1,000, subject to the applicable offer terms. Both are government securities — but they are different products.</div>
+            <span class="instrument-tag">Low Risk · Accessible</span>
+          </div>
+
+          <div class="instrument-card corp">
+            <div class="instrument-num">03 — Corporate</div>
+            <div class="instrument-name">Corporate Bonds</div>
+            <div class="instrument-body">Here you're lending money to a <strong>company</strong> instead of the Federal Government. Corporate bonds can carry more credit risk. Some are secured, while others are unsecured — just like what happened with Geregu Power. Always read the terms of the particular issue.</div>
+            <span class="instrument-tag">Moderate–High Risk</span>
+          </div>
+
+          <div class="instrument-card paper">
+            <div class="instrument-num">04 — Corporate</div>
+            <div class="instrument-name">Commercial Papers</div>
+            <div class="instrument-body">A short-term, <strong>unsecured</strong> debt instrument issued by a company to raise money quickly. The return can be higher than lower-risk instruments. But remember: higher return does not mean better investment. It usually means you're taking on more risk.</div>
+            <span class="instrument-tag">Higher Risk · Short-term</span>
+          </div>
+
+        </div>
+
+        <div class="warning-box">
+          <div class="wb-title">⚠️ Your broker may reach out — but don't invest blindly</div>
+          <ul>
+            <li>Don't invest simply because your broker sent you an offer</li>
+            <li>Ask who you are lending your money to</li>
+            <li>Confirm when you will get your money back</li>
+            <li>Understand what return you are getting and why</li>
+            <li>Find out if the instrument is secured or unsecured</li>
+            <li>Know what happens if the issuer cannot pay</li>
+          </ul>
+        </div>
+
+        <p><strong>Know what you are buying.</strong> The Geregu Power situation is a reminder that even investment-grade-looking instruments can carry real default risk when the company behind them runs into trouble.</p>
+
+        <p>Here's something else many people don't know: depending on the instrument and the lender's requirements, investment assets such as eligible bonds and shares can sometimes be used as <strong>collateral for financing</strong>. Your investment doesn't necessarily have to just sit there. But eligibility and terms matter — not every bond or stock will automatically qualify.</p>
+
+        <div class="question-box">
+          <div class="qb-title">Before committing to any investment, ask yourself:</div>
+          <ul>
+            <li>Who am I lending my money to?</li>
+            <li>When will I get my money back?</li>
+            <li>What return am I getting — and is it justified by the risk?</li>
+            <li>Is this instrument secured or unsecured?</li>
+            <li>What happens if the issuer cannot pay?</li>
+            <li>Does this investment align with my personal financial goals?</li>
+          </ul>
+        </div>
+
+        <p>This is exactly why I keep talking about having an <strong>Investment Policy Statement (IPS)</strong>. Your investment strategy should be built around you — your goals, your risk appetite, your time horizon, your income, your responsibilities. No two investors are the same.</p>
+
+        <div class="ips-cta">
+          <h3>Build Your Free Investment Policy Statement</h3>
+          <p>The free IPS Generator on Rise With Stocks helps you create a personalised investment roadmap. Input your unique details, download your IPS as a PDF, and review it before every investment decision.</p>
+          <a href="https://risewithstocks.com/ips.html">Create My Free IPS →</a>
+        </div>
+
+        <p>Don't just chase the investment offering with the highest return. Understand the instrument. Understand the risk. Understand yourself. Then make your decision. That's what informed investing looks like.</p>
+
+        <div class="author-signoff">
+          <div class="signoff-avatar">KM</div>
+          <div class="signoff-info">
+            <div class="name">King Moses O.A.</div>
+            <div class="role">Rise With Stocks · Learn. Invest. Grow.</div>
+          </div>
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-playbook">
+      <h3>The Dangote IPO Playbook</h3>
+      <p>70 pages. Everything you need to position yourself before October 2026.</p>
+      <a href="https://nestuge.com/uuowodqkx">Get It Now — ₦4,500 →</a>
+    </div>
+
+    <div class="wa-card">
+      <h3>📲 Join the Community</h3>
+      <p>Get real-time updates directly on WhatsApp</p>
+      <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path fill="#fff" d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.773.461 3.476 1.34 4.968L2 22l5.173-1.316A9.955 9.955 0 0012.004 22C17.523 22 22 17.523 22 12.004 22 6.477 17.523 2 12.004 2zm0 18.214a8.21 8.21 0 01-4.188-1.148l-.3-.179-3.07.781.81-2.99-.196-.307a8.197 8.197 0 01-1.27-4.367c0-4.536 3.692-8.228 8.228-8.228 4.536 0 8.208 3.682 8.208 8.218 0 4.536-3.672 8.22-8.222 8.22z"/></svg>
+        Follow the Channel
+      </a>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>📰 Previous Updates</h3>
+      <div class="archive-item">
+        <div class="archive-tag">Coming Soon</div>
+        <div class="archive-title">Dangote IPO — What the October Window Means for You</div>
+        <div class="archive-date">Next issue</div>
+      </div>
+      <div class="archive-item">
+        <div class="archive-tag">Current Issue</div>
+        <div class="archive-title">Geregu Power, Bonds & What Many Investors Don't Know</div>
+        <div class="archive-date">August 11, 2026</div>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>🛠️ Free Tools</h3>
+      <a href="/ips.html" class="sidebar-link"><span class="icon">📋</span> IPS Generator</a>
+      <a href="/calculator.html" class="sidebar-link"><span class="icon">📊</span> IPO Calculator</a>
+      <a href="/wealth-destroyer.html" class="sidebar-link"><span class="icon">💸</span> Wealth Destroyer</a>
+      <a href="/beat-inflation.html" class="sidebar-link"><span class="icon">📈</span> Beat Inflation</a>
+      <a href="/bonds.html" class="sidebar-link"><span class="icon">🏛️</span> FGN Bonds Calculator</a>
+      <a href="/tbills.html" class="sidebar-link"><span class="icon">📄</span> T-Bills Calculator</a>
+    </div>
+
+  </aside>
+
+</div>
+
+<footer>
+  <p>© 2026 King Moses O.A. · Rise With Stocks · <a href="https://risewithstocks.com">risewithstocks.com</a><br>
+  For educational purposes only. Not financial advice. Always consult a licensed financial adviser.<br>
+  <a href="https://whatsapp.com/channel/0029Vb8AE6rJENxub6ExxW2t">WhatsApp Channel</a> · <a href="/contact.html">Contact</a></p>
+</footer>
+
+<script>
+function openDrawer(){ document.getElementById('nav-drawer').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeDrawer(){ document.getElementById('nav-drawer').classList.remove('open'); document.body.style.overflow=''; }
+</script>
+
+</body>
+</html>
